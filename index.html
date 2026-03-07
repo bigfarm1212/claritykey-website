@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClarityKey AI | Empowering Every Writer</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Small adjustments for accessibility */
+        :root {
+            --theme-primary: #5fb2ec;
+            /* Keep the friendly blue */
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+        }
+
+        .hero-content h1 {
+            letter-spacing: -0.02em;
+            /* Better readability for Lexend */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            ClarityKey AI
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Mission</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Modes</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+
+            <li><a href="subscription.html" id="subscription-link" style="display: none;">Subscription</a></li>
+            <li><a href="auth.html" id="signin-link">Sign In</a></li>
+            <li><a href="auth.html?signup=true" id="signup-link">Sign Up</a></li>
+        </ul>
+        <a href="downloads/ClarityKey_AI.exe" class="clay-button"
+            style="padding: 0.8rem 2rem; font-size: 1rem;">Download (.exe)</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="hero-content">
+            <h1>Writing made easier. <span style="color: var(--theme-primary);">Instantly.</span></h1>
+            <p>ClarityKey is a calm, background assistant that corrects spelling and simplified writing exactly when you
+                need it. No distractions, just clarity.</p>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="downloads/ClarityKey_AI.exe" class="clay-button">Download ClarityKey AI (.exe)</a>
+                <a href="#how-it-works" class="clay-button" style="background: white; color: var(--theme-text);">See How
+                    It Works</a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="clay-card demo-window"
+                style="width: 100%; max-width: 480px; padding: 0; overflow: hidden; transform: rotate(-2deg);">
+                <div
+                    style="background: rgba(240, 244, 248, 0.5); padding: 0.75rem 1.25rem; display: flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <div style="display: flex; gap: 6px;">
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56;"></div>
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e;"></div>
+                        <div style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f;"></div>
+                    </div>
+                    <span
+                        style="margin-left: auto; font-size: 0.75rem; color: var(--theme-text-light); font-weight: 600;">ClarityKey
+                        AI Demo</span>
+                </div>
+                <div
+                    style="padding: 2.5rem; min-height: 180px; position: relative; display: flex; align-items: center; justify-content: center;">
+                    <p id="demo-text"
+                        style="font-size: 1.25rem; line-height: 1.6; color: var(--theme-text); margin: 0; text-align: center;">
+                        Ths is a test sentance with some mistaks.</p>
+
+                    <!-- Virtual Cursor -->
+                    <div id="demo-cursor"
+                        style="position: absolute; width: 24px; height: 24px; pointer-events: none; z-index: 100; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; top: 50%; left: 50%;">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.65376 12.3818L19.3462 8.65376L15.6182 22.3462L12.5 15.5L5.65376 12.3818Z"
+                                fill="white" stroke="#2d3436" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+
+                    <!-- Keypress Bubble -->
+                    <div id="keypress-indicator"
+                        style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); background: #2d3436; color: white; padding: 0.5rem 1.25rem; border-radius: 2rem; font-size: 0.85rem; font-weight: 600; opacity: 0; transition: all 0.4s ease; z-index: 110; box-shadow: 0 4px 12px rgba(0,0,0,0.15); white-space: nowrap;">
+                        Pressing Ctrl + C
+                    </div>
+
+                    <div id="ai-badge"
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%) scale(0.9); background: white; padding: 0.75rem 1.5rem; border-radius: 2rem; box-shadow: 0 10px 25px rgba(95, 178, 236, 0.2); border: 1px solid var(--theme-primary); font-size: 0.9rem; font-weight: 600; color: var(--theme-primary); display: flex; align-items: center; gap: 8px; z-index: 10; opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none;">
+                        <span>✨</span> ClarityKey is correcting...
+                    </div>
+                </div>
+                <div
+                    style="padding: 0.75rem 1.25rem; background: rgba(240, 244, 248, 0.3); border-top: 1px solid rgba(0,0,0,0.05); text-align: right;">
+                    <span
+                        style="font-size: 0.7rem; color: var(--theme-text-light); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Ctrl
+                        + C to process</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-std" id="how-it-works">
+        <div class="section-title">
+            <h2>3 Simple Steps</h2>
+            <p>ClarityKey works where you do. No need to switch apps.</p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #eff6ff; color: var(--theme-primary);">1</div>
+                    <h3>Highlight</h3>
+                    <p>Select your text in any editor, browser, or email app.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #fdf4ff; color: var(--accent-purple);">2</div>
+                    <h3>Copy</h3>
+                    <p>Press Ctrl + C. ClarityKey processes it in the background instantly.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #fff7ed; color: var(--accent-orange);">3</div>
+                    <h3>Paste</h3>
+                    <p>Press Ctrl + V (or let Auto-Paste do it) to see the corrected version.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-white" id="features">
+        <div class="wave-divider wave-top">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    fill="#f0f4f8"></path>
+            </svg>
+        </div>
+
+        <div class="section-title">
+            <h2>Correction <span style="color: var(--theme-primary);">Modes</span></h2>
+            <p>Switch modes easily from your system tray to match your writing task.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #eff6ff; color: var(--theme-primary);">🖋</div>
+                    <h3>Spelling Fix</h3>
+                    <p>Fixes typos instantly without changing your unique writing style.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #fdf4ff; color: var(--accent-purple);">⚖️</div>
+                    <h3>Grammar Support</h3>
+                    <p>Cleans up sentence structure while keeping your original tone.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #fff7ed; color: var(--accent-orange);">✨</div>
+                    <h3>Simplified Writing</h3>
+                    <p>Rewrites complex sentences into clear, easy-to-read language.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="clay-card">
+                    <div class="feature-icon" style="background: #f0fdf4; color: var(--accent-green);">💼</div>
+                    <h3>Professional Rewrite</h3>
+                    <p>Refines your text to sound polished and business-ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Anywhere Carousel Section -->
+    <section class="section-std" id="use-anywhere">
+        <div class="section-title">
+            <h2>Use <span style="color: var(--theme-primary);">Anywhere</span></h2>
+            <p>ClarityKey works in every app, game, and window. No exceptions.</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <!-- Slide 1: Minecraft -->
+                <div class="carousel-slide">
+                    <div class="clay-card carousel-card">
+                        <div class="carousel-image-container"
+                            style="background: #1c1c24; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <svg id="svg-s1" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice"
+                                xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                <defs>
+                                    <style>
+                                        #svg-s1 * {
+                                            box-sizing: border-box;
+                                        }
+
+                                        #svg-s1 .bg {
+                                            fill: #1c1c24;
+                                        }
+
+                                        #svg-s1 .glass-panel {
+                                            fill: rgba(43, 43, 54, 0.8);
+                                            rx: 12;
+                                            stroke: rgba(255, 255, 255, 0.05);
+                                            stroke-width: 1;
+                                        }
+
+                                        #svg-s1 .txt {
+                                            font-family: 'Inter', system-ui, sans-serif;
+                                            font-size: 15px;
+                                            fill: #e2e8f0;
+                                        }
+
+                                        #svg-s1 .dim {
+                                            fill: #94a3b8;
+                                        }
+
+                                        #svg-s1 .camera {
+                                            animation: s1-cam 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                                            transform-origin: 150px 200px;
+                                        }
+
+                                        #svg-s1 .fade {
+                                            animation: s1-fade 15s infinite;
+                                        }
+
+                                        #svg-s1 .type {
+                                            animation: s1-type 15s steps(20, end) infinite;
+                                        }
+
+                                        #svg-s1 .hl {
+                                            animation: s1-hl 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                                            fill: rgba(99, 102, 241, 0.5);
+                                            opacity: 0;
+                                            rx: 4;
+                                        }
+
+                                        #svg-s1 .wrong {
+                                            animation: s1-hide 15s infinite;
+                                        }
+
+                                        #svg-s1 .right {
+                                            animation: s1-show 15s infinite;
+                                            opacity: 0;
+                                        }
+
+                                        #svg-s1 .tt1 {
+                                            animation: s1-tt1 15s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+                                            opacity: 0;
+                                            transform-origin: 200px 180px;
+                                        }
+
+                                        #svg-s1 .tt2 {
+                                            animation: s1-tt2 15s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+                                            opacity: 0;
+                                            transform-origin: 150px 180px;
+                                        }
+
+                                        @keyframes s1-cam {
+
+                                            0%,
+                                            10% {
+                                                transform: scale(1);
+                                            }
+
+                                            20%,
+                                            80% {
+                                                transform: scale(1.35) translateY(-10px);
+                                            }
+
+                                            90%,
+                                            100% {
+                                                transform: scale(1);
+                                            }
+                                        }
+
+                                        @keyframes s1-fade {
+
+                                            0%,
+                                            90% {
+                                                opacity: 1;
+                                            }
+
+                                            95%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s1-type {
+
+                                            0%,
+                                            20% {
+                                                width: 0;
+                                            }
+
+                                            35%,
+                                            100% {
+                                                width: 400px;
+                                            }
+                                        }
+
+                                        @keyframes s1-hl {
+
+                                            0%,
+                                            54% {
+                                                opacity: 0;
+                                            }
+
+                                            55%,
+                                            65% {
+                                                opacity: 1;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s1-hide {
+
+                                            0%,
+                                            65% {
+                                                opacity: 1;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s1-show {
+
+                                            0%,
+                                            65% {
+                                                opacity: 0;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 1;
+                                            }
+                                        }
+
+                                        @keyframes s1-tt1 {
+
+                                            0%,
+                                            39% {
+                                                opacity: 0;
+                                                transform: scale(0.5) translateY(15px);
+                                            }
+
+                                            40%,
+                                            53% {
+                                                opacity: 1;
+                                                transform: scale(1) translateY(0);
+                                            }
+
+                                            55%,
+                                            100% {
+                                                opacity: 0;
+                                                transform: scale(0.8) translateY(-15px);
+                                            }
+                                        }
+
+                                        @keyframes s1-tt2 {
+
+                                            0%,
+                                            64% {
+                                                opacity: 0;
+                                                transform: scale(0.5) translateY(15px);
+                                            }
+
+                                            65%,
+                                            83% {
+                                                opacity: 1;
+                                                transform: scale(1) translateY(0);
+                                            }
+
+                                            85%,
+                                            100% {
+                                                opacity: 0;
+                                                transform: scale(0.8) translateY(-15px);
+                                            }
+                                        }
+                                    </style>
+                                    <clipPath id="s1-clip">
+                                        <rect class="type" x="70" y="210" width="400" height="40" />
+                                    </clipPath>
+                                    <filter id="s1-glow" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="8" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                    <linearGradient id="s1-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="rgba(255,255,255,0.08)" />
+                                        <stop offset="100%" stop-color="rgba(255,255,255,0.01)" />
+                                    </linearGradient>
+                                </defs>
+                                <rect class="bg" width="100%" height="100%" />
+
+                                <g class="camera">
+                                    <text class="txt dim" x="40" y="140">&lt;Player1&gt; Hey anyone online?</text>
+                                    <text class="txt dim" x="40" y="175">&lt;Admin&gt; Yes, server is up!</text>
+
+                                    <g class="fade">
+                                        <!-- Glass effect chat box -->
+                                        <rect class="glass-panel" fill="url(#s1-grad)" x="30" y="200" width="540"
+                                            height="50" filter="url(#s1-glow)" />
+                                        <text class="txt dim" x="50" y="232">&gt;</text>
+
+                                        <!-- Typing container -->
+                                        <g clip-path="url(#s1-clip)">
+                                            <text class="txt wrong" x="75" y="232">It's a <tspan fill="#f43f5e">beatiful
+                                                </tspan> day!</text>
+                                            <rect class="hl" x="65" y="212" width="200" height="28" />
+                                            <text class="txt right" x="75" y="232">It's a <tspan fill="#10b981">
+                                                    beautiful</tspan> day!</text>
+                                        </g>
+
+                                        <!-- Tooltip 1 -->
+                                        <g class="tt1">
+                                            <rect x="70" y="155" width="260" height="34" rx="17" fill="#6366f1"
+                                                filter="url(#s1-glow)" />
+                                            <path d="M85,188 L95,188 L90,196 Z" fill="#6366f1" />
+                                            <text x="85" y="177" fill="#fff" font-family="'Inter', sans-serif"
+                                                font-size="13" font-weight="600">✨ AI: Understanding context...</text>
+                                        </g>
+
+                                        <!-- Tooltip 2 -->
+                                        <g class="tt2">
+                                            <rect x="70" y="155" width="140" height="34" rx="17" fill="#10b981"
+                                                filter="url(#s1-glow)" />
+                                            <path d="M85,188 L95,188 L90,196 Z" fill="#10b981" />
+                                            <text x="85" y="177" fill="#fff" font-family="'Inter', sans-serif"
+                                                font-size="13" font-weight="600">✅ Fixed &amp; Sent!</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="carousel-content">
+                            <h3>AI Understands Games</h3>
+                            <p>Correct your chat in <strong>Minecraft</strong>, Roblox, or any other game instantly.
+                                Just highlight, Ctrl+C, and return to play.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2: Browser -->
+                <div class="carousel-slide">
+                    <div class="clay-card carousel-card">
+                        <div class="carousel-image-container"
+                            style="background: #f0f4f8; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <svg id="svg-s2" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice"
+                                xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                <defs>
+                                    <style>
+                                        #svg-s2 * {
+                                            box-sizing: border-box;
+                                        }
+
+                                        #svg-s2 .bg {
+                                            fill: #f0f4f8;
+                                        }
+
+                                        #svg-s2 .card {
+                                            fill: #ffffff;
+                                            rx: 16;
+                                            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.08));
+                                            stroke: #e2e8f0;
+                                            stroke-width: 1px;
+                                        }
+
+                                        #svg-s2 .txt {
+                                            font-family: 'Inter', system-ui, sans-serif;
+                                            font-size: 16px;
+                                            fill: #334155;
+                                        }
+
+                                        #svg-s2 .btn {
+                                            fill: #3b82f6;
+                                            rx: 8;
+                                            transition: fill 0.3s;
+                                        }
+
+                                        #svg-s2 .camera {
+                                            animation: s2-cam 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                                            transform-origin: center;
+                                        }
+
+                                        #svg-s2 .fade {
+                                            animation: s2-fade 15s infinite;
+                                        }
+
+                                        #svg-s2 .type {
+                                            animation: s2-type 15s steps(30, end) infinite;
+                                        }
+
+                                        #svg-s2 .hl {
+                                            animation: s2-hl 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                                            fill: rgba(59, 130, 246, 0.2);
+                                            opacity: 0;
+                                            rx: 4;
+                                        }
+
+                                        #svg-s2 .wrong {
+                                            animation: s2-hide 15s infinite;
+                                        }
+
+                                        #svg-s2 .right {
+                                            animation: s2-show 15s infinite;
+                                            opacity: 0;
+                                        }
+
+                                        #svg-s2 .tt1 {
+                                            animation: s2-tt1 15s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+                                            opacity: 0;
+                                            transform-origin: 220px 105px;
+                                        }
+
+                                        #svg-s2 .tt2 {
+                                            animation: s2-tt2 15s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+                                            opacity: 0;
+                                            transform-origin: 155px 105px;
+                                        }
+
+                                        @keyframes s2-cam {
+
+                                            0%,
+                                            10% {
+                                                transform: scale(1);
+                                            }
+
+                                            20%,
+                                            80% {
+                                                transform: scale(1.3) translateY(10px);
+                                            }
+
+                                            90%,
+                                            100% {
+                                                transform: scale(1);
+                                            }
+                                        }
+
+                                        @keyframes s2-fade {
+
+                                            0%,
+                                            90% {
+                                                opacity: 1;
+                                            }
+
+                                            95%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s2-type {
+
+                                            0%,
+                                            20% {
+                                                width: 0;
+                                            }
+
+                                            35%,
+                                            100% {
+                                                width: 450px;
+                                            }
+                                        }
+
+                                        @keyframes s2-hl {
+
+                                            0%,
+                                            54% {
+                                                opacity: 0;
+                                            }
+
+                                            55%,
+                                            65% {
+                                                opacity: 1;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s2-hide {
+
+                                            0%,
+                                            65% {
+                                                opacity: 1;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s2-show {
+
+                                            0%,
+                                            65% {
+                                                opacity: 0;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 1;
+                                            }
+                                        }
+
+                                        @keyframes s2-tt1 {
+
+                                            0%,
+                                            39% {
+                                                opacity: 0;
+                                                transform: scale(0.5) translateY(15px);
+                                            }
+
+                                            40%,
+                                            53% {
+                                                opacity: 1;
+                                                transform: scale(1) translateY(0);
+                                            }
+
+                                            55%,
+                                            100% {
+                                                opacity: 0;
+                                                transform: scale(0.8) translateY(-15px);
+                                            }
+                                        }
+
+                                        @keyframes s2-tt2 {
+
+                                            0%,
+                                            64% {
+                                                opacity: 0;
+                                                transform: scale(0.5) translateY(15px);
+                                            }
+
+                                            65%,
+                                            83% {
+                                                opacity: 1;
+                                                transform: scale(1) translateY(0);
+                                            }
+
+                                            85%,
+                                            100% {
+                                                opacity: 0;
+                                                transform: scale(0.8) translateY(-15px);
+                                            }
+                                        }
+                                    </style>
+                                    <clipPath id="s2-clip">
+                                        <rect class="type" x="70" y="150" width="450" height="40" />
+                                    </clipPath>
+                                    <filter id="s2-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.15)" />
+                                    </filter>
+                                </defs>
+                                <rect class="bg" width="100%" height="100%" />
+
+                                <g class="camera">
+                                    <rect fill="#e2e8f0" width="100%" height="45" />
+                                    <circle fill="#ef4444" cx="24" cy="22" r="7" />
+                                    <circle fill="#f59e0b" cx="48" cy="22" r="7" />
+                                    <circle fill="#10b981" cx="72" cy="22" r="7" />
+
+                                    <g class="fade">
+                                        <rect class="card" x="40" y="70" width="520" height="230" />
+                                        <circle fill="#e2e8f0" cx="80" cy="115" r="24" />
+                                        <text x="120" y="122" font-family="'Inter', sans-serif" font-weight="700"
+                                            font-size="20" fill="#0f172a">New Post</text>
+
+                                        <!-- Editor Box -->
+                                        <rect fill="#f8fafc" x="65" y="155" width="470" height="50" rx="8"
+                                            stroke="#cbd5e1" stroke-width="1" />
+
+                                        <g clip-path="url(#s2-clip)">
+                                            <text class="txt wrong" x="80" y="186">Just finished <tspan fill="#e11d48">
+                                                    writting</tspan> an amazing blog post!</text>
+                                            <rect class="hl" x="75" y="165" width="400" height="30" />
+                                            <text class="txt right" x="80" y="186">Just finished <tspan fill="#059669">
+                                                    writing</tspan> an amazing blog post!</text>
+                                        </g>
+
+                                        <!-- Button -->
+                                        <rect class="btn" x="400" y="235" width="135" height="40" />
+                                        <text x="430" y="260" font-family="'Inter', sans-serif" font-weight="600"
+                                            font-size="15" fill="#fff">Publish</text>
+
+                                        <!-- Tooltip 1 -->
+                                        <g class="tt1">
+                                            <rect x="75" y="100" width="280" height="36" rx="18" fill="#6366f1"
+                                                filter="url(#s2-shadow)" />
+                                            <path d="M95,135 L105,135 L100,145 Z" fill="#6366f1" />
+                                            <text x="95" y="123" font-family="'Inter', sans-serif" font-weight="600"
+                                                font-size="14" fill="#fff">✨ AI: Checking grammar &amp; tone...</text>
+                                        </g>
+
+                                        <!-- Tooltip 2 -->
+                                        <g class="tt2">
+                                            <rect x="75" y="100" width="160" height="36" rx="18" fill="#10b981"
+                                                filter="url(#s2-shadow)" />
+                                            <path d="M95,135 L105,135 L100,145 Z" fill="#10b981" />
+                                            <text x="95" y="123" font-family="'Inter', sans-serif" font-weight="600"
+                                                font-size="14" fill="#fff">✅ Ready to publish!</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="carousel-content">
+                            <h3>Intelligent Social Posting</h3>
+                            <p>Perfect for social media, emails, and web-based editors. Works seamlessly in Chrome,
+                                Edge, and Firefox.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3: Code/Editor -->
+                <div class="carousel-slide">
+                    <div class="clay-card carousel-card">
+                        <div class="carousel-image-container"
+                            style="background: #0d1117; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <svg id="svg-s3" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice"
+                                xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                <defs>
+                                    <style>
+                                        #svg-s3 * {
+                                            box-sizing: border-box;
+                                        }
+
+                                        #svg-s3 .bg {
+                                            fill: #0d1117;
+                                        }
+
+                                        #svg-s3 .editor-bg {
+                                            fill: #161b22;
+                                            rx: 12;
+                                            stroke: #30363d;
+                                            stroke-width: 1px;
+                                        }
+
+                                        #svg-s3 .txt {
+                                            font-family: 'Fira Code', 'Consolas', monospace;
+                                            font-size: 15px;
+                                            fill: #c9d1d9;
+                                        }
+
+                                        #svg-s3 .kw {
+                                            fill: #ff7b72;
+                                        }
+
+                                        #svg-s3 .func {
+                                            fill: #d2a8ff;
+                                        }
+
+                                        #svg-s3 .str {
+                                            fill: #a5d6ff;
+                                        }
+
+                                        #svg-s3 .cmt {
+                                            fill: #8b949e;
+                                            font-style: italic;
+                                        }
+
+                                        #svg-s3 .camera {
+                                            animation: s3-cam 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                                            transform-origin: center;
+                                        }
+
+                                        #svg-s3 .fade {
+                                            animation: s3-fade 15s infinite;
+                                        }
+
+                                        #svg-s3 .type {
+                                            animation: s3-type 15s steps(25, end) infinite;
+                                        }
+
+                                        #svg-s3 .hl {
+                                            animation: s3-hl 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                                            fill: rgba(139, 148, 158, 0.25);
+                                            opacity: 0;
+                                            rx: 4;
+                                        }
+
+                                        #svg-s3 .wrong {
+                                            animation: s3-hide 15s infinite;
+                                        }
+
+                                        #svg-s3 .right {
+                                            animation: s3-show 15s infinite;
+                                            opacity: 0;
+                                        }
+
+                                        #svg-s3 .tt1 {
+                                            animation: s3-tt1 15s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+                                            opacity: 0;
+                                            transform-origin: 220px 85px;
+                                        }
+
+                                        #svg-s3 .tt2 {
+                                            animation: s3-tt2 15s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+                                            opacity: 0;
+                                            transform-origin: 155px 85px;
+                                        }
+
+                                        @keyframes s3-cam {
+
+                                            0%,
+                                            10% {
+                                                transform: scale(1);
+                                            }
+
+                                            20%,
+                                            80% {
+                                                transform: scale(1.35) translateY(15px);
+                                            }
+
+                                            90%,
+                                            100% {
+                                                transform: scale(1);
+                                            }
+                                        }
+
+                                        @keyframes s3-fade {
+
+                                            0%,
+                                            90% {
+                                                opacity: 1;
+                                            }
+
+                                            95%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s3-type {
+
+                                            0%,
+                                            20% {
+                                                width: 0;
+                                            }
+
+                                            35%,
+                                            100% {
+                                                width: 450px;
+                                            }
+                                        }
+
+                                        @keyframes s3-hl {
+
+                                            0%,
+                                            54% {
+                                                opacity: 0;
+                                            }
+
+                                            55%,
+                                            65% {
+                                                opacity: 1;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s3-hide {
+
+                                            0%,
+                                            65% {
+                                                opacity: 1;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        @keyframes s3-show {
+
+                                            0%,
+                                            65% {
+                                                opacity: 0;
+                                            }
+
+                                            66%,
+                                            100% {
+                                                opacity: 1;
+                                            }
+                                        }
+
+                                        @keyframes s3-tt1 {
+
+                                            0%,
+                                            39% {
+                                                opacity: 0;
+                                                transform: scale(0.5) translateY(15px);
+                                            }
+
+                                            40%,
+                                            53% {
+                                                opacity: 1;
+                                                transform: scale(1) translateY(0);
+                                            }
+
+                                            55%,
+                                            100% {
+                                                opacity: 0;
+                                                transform: scale(0.8) translateY(-15px);
+                                            }
+                                        }
+
+                                        @keyframes s3-tt2 {
+
+                                            0%,
+                                            64% {
+                                                opacity: 0;
+                                                transform: scale(0.5) translateY(15px);
+                                            }
+
+                                            65%,
+                                            83% {
+                                                opacity: 1;
+                                                transform: scale(1) translateY(0);
+                                            }
+
+                                            85%,
+                                            100% {
+                                                opacity: 0;
+                                                transform: scale(0.8) translateY(-15px);
+                                            }
+                                        }
+                                    </style>
+                                    <clipPath id="s3-clip">
+                                        <rect class="type" x="70" y="125" width="450" height="30" />
+                                    </clipPath>
+                                    <filter id="s3-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                        <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="rgba(0,0,0,0.4)" />
+                                    </filter>
+                                </defs>
+                                <rect class="bg" width="100%" height="100%" />
+
+                                <g class="camera">
+                                    <rect class="editor-bg" x="30" y="30" width="540" height="300" />
+                                    <line x1="120" y1="30" x2="120" y2="330" stroke="#30363d" stroke-width="1" />
+
+                                    <!-- Line Numbers -->
+                                    <text class="txt cmt" x="80" y="80" text-anchor="end">1</text>
+                                    <text class="txt cmt" x="80" y="110" text-anchor="end">2</text>
+                                    <text class="txt cmt" x="80" y="145" text-anchor="end">3</text>
+                                    <text class="txt cmt" x="80" y="180" text-anchor="end">4</text>
+                                    <text class="txt cmt" x="80" y="210" text-anchor="end">5</text>
+
+                                    <!-- Code -->
+                                    <text class="txt" x="140" y="80">
+                                        <tspan class="kw">function</tspan>
+                                        <tspan class="func">calculateTotal</tspan>() {
+                                    </text>
+
+                                    <g class="fade">
+                                        <g clip-path="url(#s3-clip)">
+                                            <text class="txt cmt wrong" x="140" y="145">// This <tspan fill="#ff7b72">
+                                                    funciton</tspan> adds taxes securely</text>
+                                            <rect class="hl" x="135" y="125" width="310" height="28" />
+                                            <text class="txt cmt right" x="140" y="145">// This function adds taxes
+                                                securely</text>
+                                        </g>
+
+                                        <text class="txt" x="160" y="180">
+                                            <tspan class="kw">return</tspan> subtotal * <tspan class="str">1.05</tspan>;
+                                        </text>
+                                        <text class="txt" x="140" y="210">}</text>
+
+                                        <!-- Tooltips -->
+                                        <g class="tt1">
+                                            <rect x="135" y="70" width="280" height="36" rx="18" fill="#6366f1"
+                                                filter="url(#s3-shadow)" />
+                                            <path d="M155,105 L165,105 L160,115 Z" fill="#6366f1" />
+                                            <text x="155" y="93" font-family="'Inter', sans-serif" font-weight="600"
+                                                font-size="14" fill="#fff">✨ AI: Analyzing code comment...</text>
+                                        </g>
+
+                                        <g class="tt2">
+                                            <rect x="135" y="70" width="160" height="36" rx="18" fill="#10b981"
+                                                filter="url(#s3-shadow)" />
+                                            <path d="M155,105 L165,105 L160,115 Z" fill="#10b981" />
+                                            <text x="155" y="93" font-family="'Inter', sans-serif" font-weight="600"
+                                                font-size="14" fill="#fff">✅ Typo corrected!</text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="carousel-content">
+                            <h3>Context-Aware Editing</h3>
+                            <p>Works seamlessly in Word, Notepad, VS Code, and more. From creative writing to
+                                professional emails.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div class="carousel-nav">
+                <button class="nav-dot active" data-index="0"></button>
+                <button class="nav-dot" data-index="1"></button>
+                <button class="nav-dot" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="section-std" id="privacy">
+        <div class="section-title">
+            <h2>Private by <span style="color: var(--theme-primary);">Design</span></h2>
+            <p>Your privacy is not a feature – it's our foundation.</p>
+        </div>
+
+        <div class="dashboard-container">
+            <div class="clay-card dash-card" style="flex: 1; transform: rotate(-2deg);">
+                <h3>No Local Storage</h3>
+                <p>We never save your text or writing history on your computer.</p>
+            </div>
+
+            <div class="clay-card dash-card" style="flex: 1; transform: rotate(2deg);">
+                <h3>Local Processing</h3>
+                <p>Text is processed temporarily and immediately discarded after correction.</p>
+            </div>
+
+            <div class="clay-card dash-card" style="flex: 1; transform: rotate(-1deg);">
+                <h3>No Tracking</h3>
+                <p>We do not track your usage or sell your writing data to anyone.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section-white" id="pricing">
+        <div class="wave-divider wave-top">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    fill="#f0f4f8"></path>
+            </svg>
+        </div>
+
+        <div class="section-title">
+            <h2>Choose Your <span style="color: var(--theme-primary);">Plan</span></h2>
+            <p>Empower your writing with the right tools for your journey.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="clay-card pricing-card">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🌱</div>
+                <h3>Free</h3>
+                <div style="font-size: 2.5rem; font-weight: 700; margin: 1.5rem 0;">$0<span
+                        style="font-size: 1rem; color: var(--theme-text-light); font-weight: 400;">/mo</span></div>
+                <ul style="list-style: none; text-align: left; margin-bottom: 2.5rem; color: var(--theme-text-light);">
+                    <li style="margin-bottom: 0.8rem;">✨ 5 Uses per day</li>
+                    <li style="margin-bottom: 0.8rem;">🖋 All 4 correction modes</li>
+                    <li style="margin-bottom: 0.8rem;">🪟 Works in all apps</li>
+                    <li style="margin-bottom: 0.8rem; opacity: 0.5; text-decoration: line-through;">🗣️ Premium Voice
+                        Reading</li>
+                    <li style="margin-bottom: 0.8rem; opacity: 0.5; text-decoration: line-through;">🚀 Priority
+                        processing</li>
+                </ul>
+                <a href="auth.html?signup=true" class="clay-button"
+                    style="background: white; color: var(--theme-primary); width: 100%;">Get Started</a>
+            </div>
+
+            <!-- Unlimited Plan -->
+            <div class="clay-card pricing-card popular">
+                <div class="badge">Most Popular</div>
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+                <h3>Unlimited</h3>
+                <div style="font-size: 2.5rem; font-weight: 700; margin: 1.5rem 0;">$9.99<span
+                        style="font-size: 1rem; color: var(--theme-text-light); font-weight: 400;">/mo</span></div>
+                <ul style="list-style: none; text-align: left; margin-bottom: 2.5rem; color: var(--theme-text-light);">
+                    <li style="margin-bottom: 0.8rem;">✨ Unlimited uses</li>
+                    <li style="margin-bottom: 0.8rem;">🖋 All 4 correction modes</li>
+                    <li style="margin-bottom: 0.8rem;">🪟 Works in all apps</li>
+                    <li style="margin-bottom: 0.8rem; font-weight: 600; color: #7c3aed;">🗣️ Premium Voice Reading</li>
+                    <li style="margin-bottom: 0.8rem;">🚀 Priority processing</li>
+                </ul>
+                <a href="#" id="unlimited-btn" class="clay-button" style="width: 100%;">Go Unlimited</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Download Section -->
+    <div class="newsletter" id="download-final"
+        style="background: linear-gradient(135deg, var(--theme-primary), var(--accent-purple));">
+        <h2>Ready to write with clarity?</h2>
+        <p style="margin-bottom: 3rem; font-size: 1.25rem; color: rgba(255,255,255,0.9);">Join thousands of confident
+            writers today.</p>
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <a href="downloads/ClarityKey_AI.exe" class="clay-button"
+                style="background: white; color: var(--theme-text);">Download for Windows</a>
+            <a href="downloads/ClarityKey_AI.exe" class="clay-button"
+                style="background: rgba(255,255,255,0.2); color: white; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);">Download
+                for macOS</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <div class="nav-logo" style="margin-bottom: 1rem;">
+                ClarityKey AI
+            </div>
+            <p style="color: var(--theme-text-light); max-width: 300px;">Helping the world see writing through a lens of
+                clarity and accessibility.</p>
+        </div>
+        <div style="display: flex; gap: 4rem;">
+            <div>
+                <h4 style="margin-bottom: 1.5rem;">Solutions</h4>
+                <ul style="list-style: none; color: var(--theme-text-light); line-height: 2;">
+                    <li>For Dyslexia</li>
+                    <li>For Schools</li>
+                    <li>For Professionals</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem;">Privacy</h4>
+                <ul style="list-style: none; color: var(--theme-text-light); line-height: 2;">
+                    <li>Data Security</li>
+                    <li>Ethics</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
