@@ -156,6 +156,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     checkAuthState();
+
+    // --- Video Modal Logic ---
+    const videoModal = document.getElementById('video-modal');
+    const videoClose = document.getElementById('video-close');
+    const demoVideo = document.getElementById('demo-video');
+    const seeHowItWorksBtn = document.querySelector('a[href="#how-it-works"]');
+
+    if (seeHowItWorksBtn && videoModal && demoVideo) {
+        seeHowItWorksBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Using embed link with autoplay
+            demoVideo.src = "https://www.youtube.com/embed/4J6pJ9Hr8fU?autoplay=1";
+            videoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    }
+
+    if (videoClose && videoModal && demoVideo) {
+        videoClose.addEventListener('click', () => {
+            videoModal.style.display = 'none';
+            demoVideo.src = ""; // Stop the video
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Close on click outside
+    if (videoModal) {
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.style.display = 'none';
+                demoVideo.src = "";
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 });
 
 // Simple micro-interaction for clay button clicks

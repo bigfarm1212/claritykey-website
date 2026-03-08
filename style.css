@@ -686,6 +686,11 @@ footer {
     text-align: center;
 }
 
+#video-modal .modal-content {
+    background: #111;
+    border: 4px solid white;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
