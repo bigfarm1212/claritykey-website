@@ -18,11 +18,10 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v1.0.2"
+APP_VERSION = "v1.0.3"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
-OPENROUTER_API_KEY = "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"
 MODEL_ID = "mistralai/ministral-3b-2512"
 
 # Supabase Auth Configuration
@@ -141,10 +140,9 @@ class ClarityKeyApp:
         def fetch_and_play():
             try:
                 print("Fetching TTS from OpenRouter (openai/gpt-audio-mini)...")
-                # Using the existing global OPENROUTER_API_KEY
-                url = "https://openrouter.ai/api/v1/chat/completions"
+                url = f"{SUPABASE_URL}/functions/v1/openrouter-proxy"
                 headers = {
-                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Authorization": f"Bearer {self.user_session.access_token}",
                     "Content-Type": "application/json"
                 }
                 
@@ -453,9 +451,9 @@ class ClarityKeyApp:
         
         try:
             response = requests.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                f"{SUPABASE_URL}/functions/v1/openrouter-proxy",
                 headers={
-                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Authorization": f"Bearer {self.user_session.access_token}",
                     "HTTP-Referer": "https://claritykey.ai",
                     "X-OpenRouter-Title": "ClarityKey AI",
                     "Content-Type": "application/json"
