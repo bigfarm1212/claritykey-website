@@ -18,7 +18,7 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v1.0.3"
+APP_VERSION = "v1.0.6"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
@@ -143,7 +143,7 @@ class ClarityKeyApp:
                 url = f"{SUPABASE_URL}/functions/v1/openrouter-proxy"
                 headers = {
                     "apikey": SUPABASE_KEY,
-                    "Authorization": f"Bearer {self.user_session.access_token}",
+                    "X-User-Token": f"Bearer {self.user_session.access_token}",
                     "Content-Type": "application/json"
                 }
                 
@@ -456,7 +456,7 @@ class ClarityKeyApp:
                 f"{SUPABASE_URL}/functions/v1/openrouter-proxy",
                 headers={
                     "apikey": SUPABASE_KEY,
-                    "Authorization": f"Bearer {self.user_session.access_token}",
+                    "X-User-Token": f"Bearer {self.user_session.access_token}",
                     "HTTP-Referer": "https://claritykey.ai",
                     "X-OpenRouter-Title": "ClarityKey AI",
                     "Content-Type": "application/json"
