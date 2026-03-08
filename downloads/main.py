@@ -18,11 +18,11 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v1.0.1"
+APP_VERSION = "v1.0.2"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 MODEL_ID = "mistralai/ministral-3b-2512"
 
 # Supabase Auth Configuration
