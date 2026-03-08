@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoModal = document.getElementById('video-modal');
     const videoClose = document.getElementById('video-close');
     const demoVideo = document.getElementById('demo-video');
-    const seeHowItWorksBtn = document.querySelector('.hero-content a[href="#how-it-works"]');
+    const seeHowItWorksBtn = document.getElementById('see-how-it-works-btn');
 
     if (seeHowItWorksBtn && videoModal && demoVideo) {
         seeHowItWorksBtn.addEventListener('click', (e) => {
