@@ -543,11 +543,19 @@
             portalButton.disabled = true;
             portalButton.textContent = 'Redirecting...';
 
-            // Use the direct Stripe Customer Portal link
-            const portalUrl = 'https://billing.stripe.com/p/login/aFa00l0Jc3bA26HgNQbjW00';
+            if (!currentSession || !currentSession.user || !currentSession.user.email) {
+                showError("Unable to redirect: user session not found.");
+                portalButton.disabled = false;
+                portalButton.textContent = 'Manage Subscription';
+                return;
+            }
+
+            // Use the direct Stripe Customer Portal link and append the logged-in email
+            const portalUrl = new URL('https://billing.stripe.com/p/login/aFa00l0Jc3bA26HgNQbjW00');
+            portalUrl.searchParams.append('prefilled_email', currentSession.user.email);
 
             // Open in new tab for better user experience
-            window.open(portalUrl, '_blank');
+            window.open(portalUrl.toString(), '_blank');
 
             // Reset button state after a short delay
             setTimeout(() => {

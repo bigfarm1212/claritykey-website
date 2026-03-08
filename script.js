@@ -144,8 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Replace with actual Stripe Payment Link
             const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/4gM4gBeA27rQ8v5btwbjW02';
             const userId = currentSession.user.id;
-            // Redirect to Stripe, appending the Supabase User ID
-            window.location.href = `${STRIPE_PAYMENT_LINK}?client_reference_id=${userId}`;
+            const userEmail = currentSession.user.email;
+
+            // Redirect to Stripe, appending the Supabase User ID and prefilled email
+            const checkoutUrl = new URL(STRIPE_PAYMENT_LINK);
+            checkoutUrl.searchParams.append('client_reference_id', userId);
+            checkoutUrl.searchParams.append('prefilled_email', userEmail);
+
+            window.location.href = checkoutUrl.toString();
         });
     }
 
