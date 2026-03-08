@@ -46,10 +46,6 @@
                 <a href="downloads/ClarityKey_AI.exe" class="clay-button"
                     style="width: 100%; margin-bottom: 1.5rem;">Download
                     Single-file (.exe)</a>
-                <p style="font-size: 0.8rem; color: var(--theme-text-light); line-height: 1.4;">
-                    <em>Note: Windows SmartScreen may show an "Unrecognized app" warning for new software. Click
-                        <strong>"More Info"</strong> and <strong>"Run Anyway"</strong>.</em>
-                </p>
             </div>
 
         </div>
@@ -109,6 +105,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
+
+    <!-- SmartScreen Modal -->
+    <div class="modal-overlay" id="smartscreen-modal">
+        <div class="modal-content">
+            <button class="smartscreen-close">✕</button>
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🛡️</div>
+            <h2 style="margin-bottom: 1rem; color: var(--theme-text);">Microsoft Defender Note</h2>
+            <p style="color: var(--theme-text-light); margin-bottom: 2.5rem; line-height: 1.6; font-size: 1.1rem;">
+                Because ClarityKey is a brand new application, Windows SmartScreen will temporarily show an
+                <strong>"Unrecognized app"</strong> warning.
+                <br><br>
+                When installing, simply click <strong>"More info"</strong> and then <strong>"Run anyway"</strong> to
+                safely proceed!
+            </p>
+            <a href="#" id="smartscreen-confirm-btn" class="clay-button" data-direct-download="true"
+                style="width: 100%; display: inline-block; box-sizing: border-box;">I Understand, Download Now</a>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -85,12 +85,48 @@ async function updateNavUI(session) {
     }
 }
 
-// Global listener for downloads to handle protection
+// Global listener for downloads to handle protection and SmartScreen Modal
 document.addEventListener('click', (e) => {
-    const downloadBtn = e.target.closest('.clay-button[href*=".exe"]');
-    if (downloadBtn && !currentSession) {
+    const downloadBtn = e.target.closest('a[href*=".exe"]');
+    if (downloadBtn && !downloadBtn.hasAttribute('data-direct-download')) {
         e.preventDefault();
-        window.location.href = 'auth.html';
+
+        // 1. Check Auth FIRST
+        if (!currentSession) {
+            window.location.href = 'auth.html';
+            return;
+        }
+
+        // 2. If authenticated, show the SmartScreen Modal
+        const modal = document.getElementById('smartscreen-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            const confirmBtn = document.getElementById('smartscreen-confirm-btn');
+            if (confirmBtn) {
+                confirmBtn.href = downloadBtn.href;
+            }
+        }
+    }
+});
+
+// Setup SmartScreen Modal Close Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('smartscreen-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('.smartscreen-close')) {
+                modal.style.display = 'none';
+            }
+        });
+
+        const confirmBtn = document.getElementById('smartscreen-confirm-btn');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 1000); // Close automatically after they click download
+            });
+        }
     }
 });
 
