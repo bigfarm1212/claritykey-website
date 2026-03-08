@@ -142,6 +142,7 @@ class ClarityKeyApp:
                 print("Fetching TTS from OpenRouter (openai/gpt-audio-mini)...")
                 url = f"{SUPABASE_URL}/functions/v1/openrouter-proxy"
                 headers = {
+                    "apikey": SUPABASE_KEY,
                     "Authorization": f"Bearer {self.user_session.access_token}",
                     "Content-Type": "application/json"
                 }
@@ -453,6 +454,7 @@ class ClarityKeyApp:
             response = requests.post(
                 f"{SUPABASE_URL}/functions/v1/openrouter-proxy",
                 headers={
+                    "apikey": SUPABASE_KEY,
                     "Authorization": f"Bearer {self.user_session.access_token}",
                     "HTTP-Referer": "https://claritykey.ai",
                     "X-OpenRouter-Title": "ClarityKey AI",
