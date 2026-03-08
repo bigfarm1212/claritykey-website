@@ -18,7 +18,7 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v1.0.6"
+APP_VERSION = "v0.7"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
@@ -166,7 +166,7 @@ class ClarityKeyApp:
                         }
                     ],
                     "stream": True,
-                    "temperature": 0.0
+                    "temperature": 1
                 }
                 
                 response = requests.post(url, json=data, headers=headers, stream=True)
