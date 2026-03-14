@@ -18,7 +18,7 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v0.8"
+APP_VERSION = "v0.9"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
@@ -251,15 +251,24 @@ class ClarityKeyApp:
 
     def hotkey_listener(self):
         user32 = ctypes.windll.user32
-        # Register Pause key (0x13 is VK_PAUSE, 0x0000 is no modifier, 0x4000 is MOD_NOREPEAT)
-        if not user32.RegisterHotKey(None, 1, 0x0000 | 0x4000, 0x13):
-            print("Warning: Failed to register global hotkey Pause")
+        # ID 1: Insert key (0x2D is VK_INSERT, 0x0000 is no modifier)
+        ins_registered = user32.RegisterHotKey(None, 1, 0x0000 | 0x4000, 0x2D)
+        if not ins_registered:
+            print("Warning: Failed to register global hotkey Insert. Trying fallback...")
+
+        # ID 2: Backup Hotkey Ctrl+Shift+P (0x50 is 'P', 0x0002 is MOD_CONTROL, 0x0004 is MOD_SHIFT)
+        backup_registered = user32.RegisterHotKey(None, 2, 0x0002 | 0x0004 | 0x4000, 0x50)
+        
+        if not ins_registered and not backup_registered:
+            print("Warning: Failed to register fallback hotkey Ctrl+Shift+P. No hotkey will be active for TTS.")
             return
+
+        print(f"Hotkeys registered: Insert: {ins_registered}, Ctrl+Shift+P: {backup_registered}")
         
         msg = wintypes.MSG()
         while user32.GetMessageW(ctypes.byref(msg), None, 0, 0) != 0:
-            if msg.message == 0x0312:
-                if msg.wParam == 1:
+            if msg.message == 0x0312:  # WM_HOTKEY
+                if msg.wParam in [1, 2]:
                     self.communicator.hotkey_pressed.emit()
             user32.TranslateMessage(ctypes.byref(msg))
             user32.DispatchMessageW(ctypes.byref(msg))
