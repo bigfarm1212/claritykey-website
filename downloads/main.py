@@ -814,7 +814,7 @@ class SettingsWindow(QMainWindow):
         self.replace_cb.stateChanged.connect(self.update_setting('instantReplace'))
         card_layout.addWidget(self.replace_cb)
 
-        self.read_cb = QCheckBox("Read Text Aloud on Pause Key")
+        self.read_cb = QCheckBox("Read Text Aloud on Insert Key")
         self.read_cb.setChecked(self.main_app.settings.get('readAloudHotkey', True))
         self.read_cb.stateChanged.connect(self.update_setting('readAloudHotkey'))
         card_layout.addWidget(self.read_cb)
