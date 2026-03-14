@@ -18,7 +18,7 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v0.7"
+APP_VERSION = "v0.8"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
@@ -79,7 +79,8 @@ DEFAULT_SETTINGS = {
     'instantReplace': True,
     'readAloudHotkey': True,
     'easyReading': False,
-    'currentMode': 'Grammar + Spelling'
+    'currentMode': 'Grammar + Spelling',
+    'language': 'English'
 }
 
 class Communicator(QObject):
@@ -464,7 +465,7 @@ class ClarityKeyApp:
                 json={
                     "model": MODEL_ID,
                     "messages": [
-                        {"role": "user", "content": f"{MODES[self.settings['currentMode']]}\n\nText: {text}"}
+                        {"role": "user", "content": f"Target Language: {self.settings.get('language', 'English')}.\n{MODES[self.settings['currentMode']]}\n\nText: {text}"}
                     ]
                 },
                 timeout=15
@@ -808,6 +809,20 @@ class SettingsWindow(QMainWindow):
         self.mode_combo.setCurrentText(self.main_app.settings['currentMode'])
         self.mode_combo.currentTextChanged.connect(self.update_setting('currentMode'))
         card_layout.addWidget(self.mode_combo)
+
+        lbl_lang = QLabel("Output Language")
+        lbl_lang.setStyleSheet("font-size: 16px; font-weight: 600; color: #1e293b; border: none; margin-top: 15px;")
+        card_layout.addWidget(lbl_lang)
+
+        desc_lang = QLabel("Select the language for the AI output.")
+        desc_lang.setStyleSheet("font-size: 13px; color: #64748b; margin-bottom: 10px; border: none;")
+        card_layout.addWidget(desc_lang)
+
+        self.lang_combo = QComboBox()
+        self.lang_combo.addItems(["English", "Danish", "Spanish", "German", "French"])
+        self.lang_combo.setCurrentText(self.main_app.settings.get('language', 'English'))
+        self.lang_combo.currentTextChanged.connect(self.update_setting('language'))
+        card_layout.addWidget(self.lang_combo)
 
         layout.addWidget(card)
         layout.addStretch()
