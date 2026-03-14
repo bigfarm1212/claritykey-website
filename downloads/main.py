@@ -87,14 +87,21 @@ class Communicator(QObject):
     settings_changed = pyqtSignal()
     hotkey_pressed = pyqtSignal()
     uses_updated = pyqtSignal()
+    device_conflict = pyqtSignal()
 
 class ClarityKeyApp:
     def __init__(self):
         self.settings = DEFAULT_SETTINGS.copy()
         self.load_settings()
+        if 'device_id' not in self.settings:
+            import uuid
+            self.settings['device_id'] = str(uuid.uuid4())
+            self.save_settings()
+            
         self.last_text = ""
         self.is_processing = False
         self.communicator = Communicator()
+        self.communicator.device_conflict.connect(self.handle_device_conflict)
         
         # Load Icon
         if getattr(sys, 'frozen', False):
@@ -145,6 +152,7 @@ class ClarityKeyApp:
                 headers = {
                     "apikey": SUPABASE_KEY,
                     "X-User-Token": f"Bearer {self.user_session.access_token}",
+                    "X-Device-Id": self.settings.get('device_id', ''),
                     "Content-Type": "application/json"
                 }
                 
@@ -227,6 +235,13 @@ class ClarityKeyApp:
                             print(f"Failed to play audio stream: {e}")
                     else:
                         print("No audio data received in stream.")
+                elif response.status_code == 403:
+                    try:
+                        err_data = response.json()
+                        if "Device conflict" in err_data.get("error", ""):
+                            self.communicator.device_conflict.emit()
+                    except: pass
+                    print(f"OpenRouter TTS error: {response.text}")
                 else:
                     print(f"OpenRouter TTS error: {response.text}")
             except Exception as e:
@@ -307,6 +322,11 @@ class ClarityKeyApp:
             self.tray_icon = None
         self.show_login()
 
+    def handle_device_conflict(self):
+        import ctypes
+        ctypes.windll.user32.MessageBoxW(0, "Your account is being used on another device. You have been logged out.", "Device Conflict", 0x30 | 0x0)
+        self.logout()
+
     def fetch_profile_status(self):
         """Fetches and caches the user's subscription status and remaining uses."""
         if not self.user_session: return
@@ -326,6 +346,17 @@ class ClarityKeyApp:
                 data = res.json()
                 if data:
                     profile = data[0]
+                    # Claim active device async
+                    def _claim_device():
+                        try:
+                            requests.patch(
+                                f"{SUPABASE_URL}/rest/v1/profiles?id=eq.{self.user_session.user.id}",
+                                headers=user_headers,
+                                json={"active_device_id": self.settings.get('device_id')}
+                            )
+                        except: pass
+                    threading.Thread(target=_claim_device, daemon=True).start()
+                    
                     self.subscription_status = profile.get('subscription_status', 'free')
                     if self.subscription_status != 'unlimited':
                         today = datetime.date.today().isoformat()
@@ -458,6 +489,7 @@ class ClarityKeyApp:
                 headers={
                     "apikey": SUPABASE_KEY,
                     "X-User-Token": f"Bearer {self.user_session.access_token}",
+                    "X-Device-Id": self.settings.get('device_id', ''),
                     "HTTP-Referer": "https://claritykey.ai",
                     "X-OpenRouter-Title": "ClarityKey AI",
                     "Content-Type": "application/json"
@@ -485,6 +517,12 @@ class ClarityKeyApp:
                         pyautogui.hotkey('ctrl', 'v')
                         
             else:
+                if response.status_code == 403:
+                    try:
+                        err_data = response.json()
+                        if "Device conflict" in err_data.get("error", ""):
+                            self.communicator.device_conflict.emit()
+                    except: pass
                 print(f"API Error: {data}")
                 self.last_text = text
                 
@@ -854,7 +892,7 @@ class SettingsWindow(QMainWindow):
         manage_btn = QPushButton("Manage Subscription")
         manage_btn.setProperty("class", "secondary")
         import webbrowser
-        manage_btn.clicked.connect(lambda: webbrowser.open("https://claritykey.ai/subscription.html"))
+        manage_btn.clicked.connect(lambda: webbrowser.open("https://claritykey.org/subscription.html"))
         card_layout.addWidget(manage_btn, alignment=Qt.AlignmentFlag.AlignLeft)
 
         layout.addWidget(card)
@@ -978,7 +1016,7 @@ class LoginWindow(QMainWindow):
             QPushButton { background: transparent; color: #64748b; font-size: 13px; font-weight: 600; padding: 5px; border: none; }
             QPushButton:hover { color: #3b82f6; text-decoration: underline; }
         """)
-        help_btn.clicked.connect(lambda: webbrowser.open("https://claritykey.ai/auth.html"))
+        help_btn.clicked.connect(lambda: webbrowser.open("https://claritykey.org/auth.html"))
         layout.addWidget(help_btn, alignment=Qt.AlignmentFlag.AlignCenter)
 
         main_layout.addWidget(card, alignment=Qt.AlignmentFlag.AlignCenter)
