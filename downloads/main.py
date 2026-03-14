@@ -65,10 +65,10 @@ if SUPABASE_URL != "https://your-project.supabase.co":
     supabase = SupabaseAuth(SUPABASE_URL, SUPABASE_KEY)
 
 MODES = {
-    'Spelling Fix Only': "Correct only the spelling of the following text. Do not change grammar or sentence structure. Return ONLY the corrected text.",
-    'Grammar + Spelling': "Correct spelling and grammar while maintaining the original tone and style. Return ONLY the corrected text.",
-    'Simplified Version': "Rewrite the following text in clearer, easier language. Return ONLY the simplified text.",
-    'Professional Rewrite': "Rewrite the following text to make it sound professional and clear. Return ONLY the rewritten text."
+    'Spelling Fix Only': "Correct only standard typos and spelling of the following text. Do not change grammar, sentence structure, abbreviation, or deliberate slang. Analyze the context before modifying. Return ONLY the corrected text.",
+    'Grammar + Spelling': "Correct spelling and grammar while preserving deliberate slang, abbreviations, and informal chat styles. Analyze the text's context inside the local style. Return ONLY the corrected text.",
+    'Simplified Version': "Rewrite the following text in clearer, easier language. Maintain key context or names. Return ONLY the simplified version.",
+    'Professional Rewrite': "Rewrite the following text to make it sound professional and neat while fully respecting the user's intended topics. Return ONLY the rewritten text."
 }
 
 DEFAULT_SETTINGS = {
