@@ -1063,6 +1063,85 @@
             </div>
         </div>
     </section>
+    <!-- Listen Aloud Section -->
+    <section class="section-white" id="listen-aloud">
+        <div class="section-title">
+            <h2>Listen <span style="color: var(--theme-primary);">Aloud</span></h2>
+            <p>Experience your corrected writing read back to you with premium voice technology.</p>
+        </div>
+
+        <div class="dashboard-container" style="max-width: 1000px; margin: 0 auto; gap: 4rem;">
+            <div class="clay-card carousel-card" style="flex: 1; padding: 3rem; margin: 0;">
+                <div class="carousel-image-container" style="background: #1e1b4b; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                    <svg id="svg-s4" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                        <!-- SVG STYLES -->
+                        <style>
+                            #svg-s4 .bg { fill: #1e1b4b; }
+                            #svg-s4 .glass { fill: rgba(255, 255, 255, 0.03); stroke: rgba(255, 255, 255, 0.1); rx: 12; }
+                            #svg-s4 .bar { fill: #818cf8; rx: 4; transform-origin: bottom; animation: bar-bump 1.2s ease-in-out infinite; }
+                            #svg-s4 .bar-1 { height: 25px; animation-delay: 0.1s; }
+                            #svg-s4 .bar-2 { height: 50px; animation-delay: 0.4s; fill: #a78bfa; }
+                            #svg-s4 .bar-3 { height: 40px; animation-delay: 0.6s; }
+                            #svg-s4 .bar-4 { height: 70px; animation-delay: 0.2s; fill: #c084fc; }
+                            #svg-s4 .bar-5 { height: 35px; animation-delay: 0.5s; }
+                            
+                            @keyframes bar-bump {
+                                0%, 100% { transform: scaleY(0.4); }
+                                50% { transform: scaleY(1); }
+                            }
+
+                            #svg-s4 .pulse {
+                                animation: pulse-ring 2s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+                                stroke: #818cf8;
+                                stroke-width: 2;
+                                fill: none;
+                            }
+                            @keyframes pulse-ring {
+                                0% { transform: scale(0.5); opacity: 1; }
+                                70% { transform: scale(1.1); opacity: 0; }
+                                100% { opacity: 0; }
+                            }
+                        </style>
+                        <rect class="bg" width="100%" height="100%" />
+                        
+                        <!-- Sound Waves -->
+                        <g transform="translate(180, 140)">
+                            <circle class="pulse" cx="120" cy="40" r="80" style="transform-origin: 120px 40px;"/>
+                            <circle class="pulse" cx="120" cy="40" r="120" style="animation-delay: 0.6s; transform-origin: 120px 40px;"/>
+                            
+                            <circle cx="120" cy="40" r="32" fill="#6366f1" />
+                            <text x="120" y="48" font-family="sans-serif" font-size="24" text-anchor="middle">🔊</text>
+
+                            <!-- Equalizer -->
+                            <g transform="translate(45, 100)">
+                                <rect class="bar bar-1" x="0" y="0" width="12" height="40" />
+                                <rect class="bar bar-2" x="20" y="-15" width="12" height="55" />
+                                <rect class="bar bar-3" x="40" y="-5" width="12" height="45" />
+                                <rect class="bar bar-4" x="60" y="-30" width="12" height="70" />
+                                <rect class="bar bar-5" x="80" y="0" width="12" height="40" />
+                                <rect class="bar bar-2" x="100" y="-10" width="12" height="50" />
+                                <rect class="bar bar-1" x="120" y="5" width="12" height="35" />
+                            </g>
+                        </g>
+
+                        <!-- Doc floating behind -->
+                        <rect class="glass" x="50" y="60" width="160" height="220" />
+                        <line x1="75" y1="90" x2="160" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="75" y1="110" x2="180" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="75" y1="130" x2="140" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
+                        
+                        <rect x="75" y="160" width="80" height="24" rx="12" fill="#10b981"/>
+                        <text x="85" y="177" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#fff">✅ Corrected</text>
+                    </svg>
+                </div>
+                <div class="carousel-content" style="text-align: center;">
+                    <h3>Premium Voice Reading</h3>
+                    <p style="margin-bottom: 1.5rem;">Listen to your corrected writing read back aloud smoothly with premium inflection accuracy. Replay, pause, and proofread seamlessly.</p>
+                    <span style="background: rgba(124, 58, 237, 0.1); color: #7c3aed; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">✨ Unlimited Plan Exclusive</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Privacy Section -->
     <section class="section-std" id="privacy">
