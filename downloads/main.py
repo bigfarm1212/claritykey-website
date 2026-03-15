@@ -22,7 +22,7 @@ APP_VERSION = "v1.1"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
-MODEL_ID = "qwen/qwen3.5-9b"
+MODEL_ID = "qwen/qwen3.5-flash-02-23"
 
 # Supabase Auth Configuration
 SUPABASE_URL = "https://ehdwjvqwgkjfrquqwehj.supabase.co"
@@ -575,7 +575,7 @@ class ClarityKeyApp:
                 print("Text corrected and copied to clipboard.")
 
                 if self.settings.get('playNotifySound', True):
-                    try: ctypes.windll.winmm.PlaySoundW(self.notify_sound, None, 1)
+                    try: ctypes.windll.winmm.PlaySoundW(self.notify_sound, None, 0x00020001)
                     except: pass
                 
                 if self.settings['instantReplace']:
