@@ -133,6 +133,7 @@ class Communicator(QObject):
     hotkey_pressed = pyqtSignal()
     uses_updated = pyqtSignal()
     device_conflict = pyqtSignal()
+    play_sound_sgn = pyqtSignal()
 
 class ClarityKeyApp:
     def __init__(self):
@@ -147,6 +148,7 @@ class ClarityKeyApp:
         self.success_sound_path = os.path.join(base_path, "683101__florianreichelt__quick-woosh.mp3")
         mci = ctypes.windll.winmm.mciSendStringW
         mci(f'open "{self.success_sound_path}" type mpegvideo alias success_sound', None, 0, None)
+        
         if 'device_id' not in self.settings:
             import uuid
             self.settings['device_id'] = str(uuid.uuid4())
@@ -155,6 +157,7 @@ class ClarityKeyApp:
         self.last_text = ""
         self.is_processing = False
         self.communicator = Communicator()
+        self.communicator.play_sound_sgn.connect(self.play_sound_main)
         self.communicator.device_conflict.connect(self.handle_device_conflict)
         
         # Load Icon
@@ -190,6 +193,12 @@ class ClarityKeyApp:
             self.setup_tray()
             self.watcher_thread.start()
             self.hotkey_thread.start()
+
+    def play_sound_main(self):
+        try:
+            mci = ctypes.windll.winmm.mciSendStringW
+            mci('play success_sound from 0', None, 0, None)
+        except: pass
 
     def play_tts_for_last_text(self):
         if not self.settings.get('readAloudHotkey', True) or not self.last_text:
