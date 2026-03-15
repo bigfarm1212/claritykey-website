@@ -1064,6 +1064,7 @@
         </div>
     </section>
     <!-- Listen Aloud Section -->
+    <audio id="tts-demo" src="downloads/demo_voice.mp3"></audio>
     <section class="section-white" id="listen-aloud">
         <div class="section-title">
             <h2>Listen <span style="color: var(--theme-primary);">Aloud</span></h2>
@@ -1072,7 +1073,7 @@
 
         <div class="dashboard-container" style="max-width: 1000px; margin: 0 auto; gap: 4rem;">
             <div class="clay-card carousel-card" style="flex: 1; padding: 3rem; margin: 0;">
-                <div class="carousel-image-container" style="background: #1e1b4b; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                <div class="carousel-image-container" onclick="document.getElementById('tts-demo').play()" style="background: #1e1b4b; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; cursor: pointer;" title="Click to hear demo">
                     <svg id="svg-s4" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
                         <!-- SVG STYLES -->
                         <style>
@@ -1081,13 +1082,13 @@
                             #svg-s4 .bar { fill: #818cf8; rx: 4; transform-origin: bottom; animation: bar-bump 1.2s ease-in-out infinite; }
                             #svg-s4 .bar-1 { height: 25px; animation-delay: 0.1s; }
                             #svg-s4 .bar-2 { height: 50px; animation-delay: 0.4s; fill: #a78bfa; }
-                            #svg-s4 .bar-3 { height: 40px; animation-delay: 0.6s; }
+                            #svg-s4 .bar-3 { height: 40px; animation-delay: 0.7s; }
                             #svg-s4 .bar-4 { height: 70px; animation-delay: 0.2s; fill: #c084fc; }
-                            #svg-s4 .bar-5 { height: 35px; animation-delay: 0.5s; }
+                            #svg-s4 .bar-5 { height: 35px; animation-delay: 0.9s; }
                             
                             @keyframes bar-bump {
                                 0%, 100% { transform: scaleY(0.4); }
-                                50% { transform: scaleY(1); }
+                                50% { transform: scaleY(1.1); }
                             }
 
                             #svg-s4 .pulse {
@@ -1101,6 +1102,12 @@
                                 70% { transform: scale(1.1); opacity: 0; }
                                 100% { opacity: 0; }
                             }
+                            
+                            #svg-s4 .speaker-node:hover {
+                                transform: scale(1.1);
+                                fill: #4f46e5;
+                                transition: transform 0.2s;
+                            }
                         </style>
                         <rect class="bg" width="100%" height="100%" />
                         
@@ -1109,8 +1116,8 @@
                             <circle class="pulse" cx="120" cy="40" r="80" style="transform-origin: 120px 40px;"/>
                             <circle class="pulse" cx="120" cy="40" r="120" style="animation-delay: 0.6s; transform-origin: 120px 40px;"/>
                             
-                            <circle cx="120" cy="40" r="32" fill="#6366f1" />
-                            <text x="120" y="48" font-family="sans-serif" font-size="24" text-anchor="middle">🔊</text>
+                            <circle class="speaker-node" cx="120" cy="40" r="32" fill="#6366f1" style="cursor: pointer;"/>
+                            <text x="120" y="48" font-family="sans-serif" font-size="24" text-anchor="middle" style="pointer-events: none;">🔊</text>
 
                             <!-- Equalizer -->
                             <g transform="translate(45, 100)">
@@ -1130,7 +1137,7 @@
                         <line x1="75" y1="110" x2="180" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
                         <line x1="75" y1="130" x2="140" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
                         
-                        <rect x="75" y="160" width="80" height="24" rx="12" fill="#10b981"/>
+                        <rect x="75" y="160" width="115" height="24" rx="12" fill="#10b981"/>
                         <text x="85" y="177" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#fff">✅ Corrected</text>
                     </svg>
                 </div>
