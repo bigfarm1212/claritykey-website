@@ -18,11 +18,11 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v1.0"
+APP_VERSION = "v1.1"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
-MODEL_ID = "mistralai/ministral-3b-2512"
+MODEL_ID = "qwen/qwen3.5-9b"
 
 # Supabase Auth Configuration
 SUPABASE_URL = "https://ehdwjvqwgkjfrquqwehj.supabase.co"
@@ -106,8 +106,27 @@ DEFAULT_SETTINGS = {
     'readAloudHotkey': True,
     'easyReading': False,
     'currentMode': 'Grammar + Spelling',
-    'language': 'English'
+    'language': 'English',
+    'playNotifySound': True
 }
+
+def ensure_sound_file():
+    filepath = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'notify.wav')
+    if not os.path.exists(filepath):
+        try:
+            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            import wave, struct, math
+            with wave.open(filepath, 'wb') as f:
+                f.setnchannels(1)
+                f.setsampwidth(2)
+                f.setframerate(44100)
+                for i in range(44100 // 4): # quarter second
+                    factor = min(1.0, i / 2000.0)  # Soft fade-in
+                    value = int(math.sin(i / 15.0) * 8000 * factor)
+                    f.writeframesraw(struct.pack('<h', value))
+        except Exception as e: 
+            print(f"Error creating sound: {e}")
+    return filepath
 
 class Communicator(QObject):
     settings_changed = pyqtSignal()
@@ -119,6 +138,7 @@ class ClarityKeyApp:
     def __init__(self):
         self.settings = DEFAULT_SETTINGS.copy()
         self.load_settings()
+        self.notify_sound = ensure_sound_file()
         if 'device_id' not in self.settings:
             import uuid
             self.settings['device_id'] = str(uuid.uuid4())
@@ -553,6 +573,10 @@ class ClarityKeyApp:
                 self.last_text = corrected
                 pyperclip.copy(corrected)
                 print("Text corrected and copied to clipboard.")
+
+                if self.settings.get('playNotifySound', True):
+                    try: ctypes.windll.winmm.PlaySoundW(self.notify_sound, None, 1)
+                    except: pass
                 
                 if self.settings['instantReplace']:
                     # Simulate Ctrl+V on Windows
@@ -848,6 +872,11 @@ class SettingsWindow(QMainWindow):
         self.replace_cb.setChecked(self.main_app.settings['instantReplace'])
         self.replace_cb.stateChanged.connect(self.update_setting('instantReplace'))
         card_layout.addWidget(self.replace_cb)
+
+        self.sound_cb = QCheckBox("Play Sound on Success (Recommended)")
+        self.sound_cb.setChecked(self.main_app.settings.get('playNotifySound', True))
+        self.sound_cb.stateChanged.connect(self.update_setting('playNotifySound'))
+        card_layout.addWidget(self.sound_cb)
 
         self.read_cb = QCheckBox("Read Text Aloud on Insert Key")
         self.read_cb.setChecked(self.main_app.settings.get('readAloudHotkey', True))
