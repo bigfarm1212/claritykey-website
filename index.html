@@ -1062,11 +1062,8 @@
                 <button class="nav-dot active" data-index="0"></button>
                 <button class="nav-dot" data-index="1"></button>
                 <button class="nav-dot" data-index="2"></button>
-            </div>
-        </div>
-    </section>
-    <!-- Listen Aloud Section -->
-    <audio id="tts-demo" src="downloads/demo_voice.mp3"></audio>
+            </div>    <!-- Listen Aloud Section -->
+    <audio id="tts-demo" src="downloads/demo_voice.mp3" onended="document.getElementById('svg-s4').classList.remove('playing')"></audio>
     <section class="section-white" id="listen-aloud">
         <div class="section-title">
             <h2>Listen <span style="color: var(--theme-primary);">Aloud</span></h2>
@@ -1075,72 +1072,67 @@
 
         <div class="dashboard-container" style="max-width: 1000px; margin: 0 auto; gap: 4rem;">
             <div class="clay-card carousel-card" style="flex: 1; padding: 3rem; margin: 0;">
-                <div class="carousel-image-container" onclick="document.getElementById('tts-demo').play()" style="background: #1e1b4b; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; cursor: pointer;" title="Click to hear demo">
+                <div class="carousel-image-container" onclick="document.getElementById('tts-demo').play(); document.getElementById('svg-s4').classList.add('playing')" style="background: #1a1e2e; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; cursor: pointer;" title="Click to hear demo">
                     <svg id="svg-s4" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-                        <!-- SVG STYLES -->
                         <style>
-                            #svg-s4 .bg { fill: #1e1b4b; }
-                            #svg-s4 .glass { fill: rgba(255, 255, 255, 0.03); stroke: rgba(255, 255, 255, 0.1); rx: 12; }
-                            #svg-s4 .bar { fill: #818cf8; rx: 4; transform-origin: bottom; animation: bar-bump 1.2s ease-in-out infinite; }
-                            #svg-s4 .bar-1 { height: 25px; animation-delay: 0.1s; }
-                            #svg-s4 .bar-2 { height: 50px; animation-delay: 0.4s; fill: #a78bfa; }
-                            #svg-s4 .bar-3 { height: 40px; animation-delay: 0.7s; }
-                            #svg-s4 .bar-4 { height: 70px; animation-delay: 0.2s; fill: #c084fc; }
-                            #svg-s4 .bar-5 { height: 35px; animation-delay: 0.9s; }
+                            #svg-s4 .bg { fill: #111827; }
+                            #svg-s4 .glass { fill: rgba(255, 255, 255, 0.05); stroke: rgba(255, 255, 255, 0.1); rx: 12; }
+                            #svg-s4 .camera { transform-origin: 140px 170px; transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+                            #svg-s4.playing .camera { transform: scale(1.75); }
                             
-                            @keyframes bar-bump {
-                                0%, 100% { transform: scaleY(0.4); }
-                                50% { transform: scaleY(1.1); }
-                            }
-
                             #svg-s4 .pulse {
+                                stroke: #6366f1; stroke-width: 2; fill: none;
+                                transform-origin: 400px 180px;
+                            }
+                            #svg-s4.playing .pulse {
                                 animation: pulse-ring 2s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
-                                stroke: #818cf8;
-                                stroke-width: 2;
-                                fill: none;
                             }
                             @keyframes pulse-ring {
-                                0% { transform: scale(0.5); opacity: 1; }
+                                0% { transform: scale(0.6); opacity: 1; }
                                 70% { transform: scale(1.1); opacity: 0; }
                                 100% { opacity: 0; }
                             }
-                            
-                            #svg-s4 .speaker-node:hover {
-                                transform: scale(1.1);
-                                fill: #4f46e5;
-                                transition: transform 0.2s;
+
+                            #svg-s4 .sentence-text { fill: rgba(249, 250, 251, 0.6); transition: all 0.3s ease; }
+                            #svg-s4.playing .sentence-text { fill: #a5f3fc; opacity: 1; font-weight: 700; transform: translateY(-2px); }
+
+                            #svg-s4 .speaker-node { fill: #4f46e5; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.3s; transform-origin: 400px 180px;}
+                            #svg-s4:hover .speaker-node { transform: scale(1.08); fill: #6366f1; }
+                            #svg-s4.playing .speaker-node { animation: speaker-beat 0.5s ease-in-out infinite; fill: #6366f1; }
+                            @keyframes speaker-beat {
+                                0%, 100% { transform: scale(1); }
+                                50% { transform: scale(1.05); }
                             }
                         </style>
                         <rect class="bg" width="100%" height="100%" />
-                        
-                        <!-- Sound Waves -->
-                        <g transform="translate(180, 140)">
-                            <circle class="pulse" cx="120" cy="40" r="80" style="transform-origin: 120px 40px;"/>
-                            <circle class="pulse" cx="120" cy="40" r="120" style="animation-delay: 0.6s; transform-origin: 120px 40px;"/>
-                            
-                            <circle class="speaker-node" cx="120" cy="40" r="32" fill="#6366f1" style="cursor: pointer;"/>
-                            <text x="120" y="48" font-family="sans-serif" font-size="24" text-anchor="middle" style="pointer-events: none;">🔊</text>
 
-                            <!-- Equalizer -->
-                            <g transform="translate(45, 100)">
-                                <rect class="bar bar-1" x="0" y="0" width="12" height="40" />
-                                <rect class="bar bar-2" x="20" y="-15" width="12" height="55" />
-                                <rect class="bar bar-3" x="40" y="-5" width="12" height="45" />
-                                <rect class="bar bar-4" x="60" y="-30" width="12" height="70" />
-                                <rect class="bar bar-5" x="80" y="0" width="12" height="40" />
-                                <rect class="bar bar-2" x="100" y="-10" width="12" height="50" />
-                                <rect class="bar bar-1" x="120" y="5" width="12" height="35" />
+                        <g class="camera">
+                            <!-- Floating Document -->
+                            <rect class="glass" x="40" y="60" width="200" height="240" />
+                            
+                            <line x1="65" y1="90" x2="160" y2="90" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
+                            
+                            <!-- Test Sentence with highlighting -->
+                            <g transform="translate(65, 120)">
+                                <text class="sentence-text" x="0" y="20" font-family="'Inter', sans-serif" font-size="14" style="letter-spacing: 0.3px;">This is a test sentence.</text>
                             </g>
+                            
+                            <line x1="65" y1="170" x2="200" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-linecap="round"/>
+                            <line x1="65" y1="190" x2="140" y2="190" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-linecap="round"/>
+
+                            <rect x="65" y="230" width="115" height="26" rx="13" fill="#10b981"/>
+                            <text x="75" y="248" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#fff" style="letter-spacing: 0.5px;">✅ Corrected</text>
                         </g>
 
-                        <!-- Doc floating behind -->
-                        <rect class="glass" x="50" y="60" width="160" height="220" />
-                        <line x1="75" y1="90" x2="160" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="75" y1="110" x2="180" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
-                        <line x1="75" y1="130" x2="140" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="4" stroke-linecap="round"/>
-                        
-                        <rect x="75" y="160" width="115" height="24" rx="12" fill="#10b981"/>
-                        <text x="85" y="177" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#fff">✅ Corrected</text>
+                        <!-- Sound Waves & Speaker aligned next to Doc -->
+                        <g transform="translate(400, 180)">
+                            <circle class="pulse" cx="0" cy="0" r="60" />
+                            <circle class="pulse" cx="0" cy="0" r="100" style="animation-delay: 0.8s;" />
+                            
+                            <circle class="speaker-node" cx="0" cy="0" r="35" />
+                            <text x="0" y="8" font-family="sans-serif" font-size="28" text-anchor="middle" style="pointer-events: none;">🔊</text>
+                        </g>
+
                     </svg>
                 </div>
                 <div class="carousel-content" style="text-align: center;">
