@@ -22,7 +22,7 @@ APP_VERSION = "v1.1"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
-MODEL_ID = "qwen/qwen3.5-flash-02-23"
+MODEL_ID = "mistralai/ministral-8b-2512"
 
 # Supabase Auth Configuration
 SUPABASE_URL = "https://ehdwjvqwgkjfrquqwehj.supabase.co"
