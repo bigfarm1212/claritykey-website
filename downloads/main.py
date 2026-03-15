@@ -135,8 +135,11 @@ class Communicator(QObject):
     device_conflict = pyqtSignal()
     play_sound_sgn = pyqtSignal()
 
-class ClarityKeyApp:
+from PyQt6.QtCore import pyqtSlot
+
+class ClarityKeyApp(QObject):
     def __init__(self):
+        super().__init__()
         self.settings = DEFAULT_SETTINGS.copy()
         self.load_settings()
         
@@ -148,6 +151,7 @@ class ClarityKeyApp:
         self.success_sound_path = os.path.join(base_path, "683101__florianreichelt__quick-woosh.mp3")
         mci = ctypes.windll.winmm.mciSendStringW
         mci(f'open "{self.success_sound_path}" type mpegvideo alias success_sound', None, 0, None)
+        mci('set success_sound volume to 1000', None, 0, None)
         
         if 'device_id' not in self.settings:
             import uuid
@@ -194,11 +198,17 @@ class ClarityKeyApp:
             self.watcher_thread.start()
             self.hotkey_thread.start()
 
+    @pyqtSlot()
     def play_sound_main(self):
         try:
             mci = ctypes.windll.winmm.mciSendStringW
-            mci('play success_sound from 0', None, 0, None)
-        except: pass
+            res = mci('play success_sound from 0', None, 0, None)
+            if res != 0:
+                buf = ctypes.create_unicode_buffer(256)
+                ctypes.windll.winmm.mciGetErrorStringW(res, buf, 256)
+                print(f"MCI Play Error {res}: {buf.value}")
+        except Exception as e:
+            print(f"Sound exception: {e}")
 
     def play_tts_for_last_text(self):
         if not self.settings.get('readAloudHotkey', True) or not self.last_text:
