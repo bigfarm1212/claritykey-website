@@ -138,7 +138,15 @@ class ClarityKeyApp:
     def __init__(self):
         self.settings = DEFAULT_SETTINGS.copy()
         self.load_settings()
-        self.notify_sound = ensure_sound_file()
+        
+        # Setup Success Sound using native MCI
+        if getattr(sys, 'frozen', False):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.dirname(os.path.abspath(__file__))
+        self.success_sound_path = os.path.join(base_path, "683101__florianreichelt__quick-woosh.mp3")
+        mci = ctypes.windll.winmm.mciSendStringW
+        mci(f'open "{self.success_sound_path}" type mpegvideo alias success_sound', None, 0, None)
         if 'device_id' not in self.settings:
             import uuid
             self.settings['device_id'] = str(uuid.uuid4())
@@ -575,7 +583,9 @@ class ClarityKeyApp:
                 print("Text corrected and copied to clipboard.")
 
                 if self.settings.get('playNotifySound', True):
-                    try: ctypes.windll.winmm.PlaySoundW(self.notify_sound, None, 0x00020001)
+                    try:
+                        mci = ctypes.windll.winmm.mciSendStringW
+                        mci('play success_sound from 0', None, 0, None)
                     except: pass
                 
                 if self.settings['instantReplace']:
