@@ -64,11 +64,37 @@ supabase = None
 if SUPABASE_URL != "https://your-project.supabase.co":
     supabase = SupabaseAuth(SUPABASE_URL, SUPABASE_KEY)
 
-MODES = {
-    'Spelling Fix Only': "Correct only standard typos and spelling of the following text. Do not change grammar, sentence structure, abbreviation, or deliberate slang. Return ONLY the corrected text.",
-    'Grammar + Spelling': "Correct spelling and grammar while preserving deliberate slang, abbreviations, and informal styles. Return ONLY the corrected text.",
-    'Simplified Version': "Rewrite the following text in clearer, easier language. Return ONLY the simplified text.",
-    'Professional Rewrite': "Rewrite the following text to make it sound professional and clear. Return ONLY the rewritten text."
+MODE_PROMPTS = {
+    'English': {
+        'Spelling Fix Only': "Correct only standard typos and spelling of the following text. Do not change grammar, sentence structure, abbreviation, or deliberate slang. Return ONLY the corrected text.",
+        'Grammar + Spelling': "Correct spelling and grammar while preserving deliberate slang, abbreviations, and informal styles. Return ONLY the corrected text.",
+        'Simplified Version': "Rewrite the following text in clearer, easier language. Return ONLY the simplified text.",
+        'Professional Rewrite': "Rewrite the following text to make it sound professional and clear. Return ONLY the rewritten text."
+    },
+    'Danish': {
+        'Spelling Fix Only': "Ret kun stavefejl og slåfejl i følgende tekst. Ændr ikke grammatik, sætningsstruktur, forkortelser eller bevidst slang. Returnér KUN den rettede tekst.",
+        'Grammar + Spelling': "Ret stavning og grammatik, mens du bevarer bevidst slang, forkortelser og uformelle stilarter. Returnér KUN den rettede tekst.",
+        'Simplified Version': "Omskriv følgende tekst til et klarere og nemmere sprog. Returnér KUN den forenklede tekst.",
+        'Professional Rewrite': "Omskriv følgende tekst for at få den til at lyde professionel og klar. Returnér KUN den omskrevne tekst."
+    },
+    'Spanish': {
+        'Spelling Fix Only': "Corrige solo los errores ortográficos y tipográficos del siguiente texto. No cambies la gramática, la estructura de las frases, las abreviaturas o el argot deliberado. Devuelve SOLO el texto corregido.",
+        'Grammar + Spelling': "Corrige la ortografía y la gramática conservando el argot deliberado, las abreviaturas y los estilos de chat informales. Devuelve SOLO el texto corregido.",
+        'Simplified Version': "Reescribe el siguiente texto en un lenguaje más claro y sencillo. Devuelve SOLO el texto simplificado.",
+        'Professional Rewrite': "Reescribe el siguiente texto para que suene profesional y claro. Devuelve SOLO el texto reescrito."
+    },
+    'German': {
+        'Spelling Fix Only': "Korrigiere nur Tippfehler und Rechtschreibung des folgenden Textes. Ändere weder Grammatik, Satzbau, Abkürzungen noch bewussten Slang. Gib NUR den korrigierten Text zurück.",
+        'Grammar + Spelling': "Korrigiere Rechtschreibung und Grammatik, während bewusster Slang, Abkürzungen und informelle Chat-Stile erhalten bleiben. Gib NUR den korrigierten Text zurück.",
+        'Simplified Version': "Schreibe den folgenden Text in verständlicherer, einfacherer Sprache um. Gib NUR den vereinfachten Text zurück.",
+        'Professional Rewrite': "Schreibe den folgenden Text um, damit er professionell und klar klingt. Gib NUR den umgeschriebenen Text zurück."
+    },
+    'French': {
+        'Spelling Fix Only': "Corrigez uniquement les fautes de frappe et d'orthographe du texte suivant. Ne modifiez pas la grammaire, la structure des phrases, les abréviations ou l'argot délibéré. Renvoyez UNIQUEMENT le texte corrigé.",
+        'Grammar + Spelling': "Corrigez l'orthographe et la France tout en préservant l'argot délibéré, les abréviations et les styles d'écriture informels. Renvoyez UNIQUEMENT le texte corrigé.",
+        'Simplified Version': "Réécrivez le texte suivant dans un langage plus clair et plus simple. Renvoyez UNIQUEMENT le texte simplifié.",
+        'Professional Rewrite': "Réécrivez le texte suivant pour qu'il soit professionnel et clair. Renvoyez UNIQUEMENT le texte réécrit."
+    }
 }
 
 DEFAULT_SETTINGS = {
@@ -493,6 +519,11 @@ class ClarityKeyApp:
         print(f"Processing in mode: {self.settings['currentMode']}")
         
         try:
+            current_lang = self.settings.get('language', 'English')
+            prompts_for_lang = MODE_PROMPTS.get(current_lang, MODE_PROMPTS['English'])
+            # Fallback to English prompt if the current Mode is missing in a specific language map
+            prompt_txt = prompts_for_lang.get(self.settings['currentMode'], MODE_PROMPTS['English'].get(self.settings['currentMode'], ""))
+
             response = requests.post(
                 f"{SUPABASE_URL}/functions/v1/openrouter-proxy",
                 headers={
@@ -506,7 +537,7 @@ class ClarityKeyApp:
                 json={
                     "model": MODEL_ID,
                     "messages": [
-                        {"role": "user", "content": f"Target Language: {self.settings.get('language', 'English')}.\n{MODES[self.settings['currentMode']]}\n\nText: {text}"}
+                        {"role": "user", "content": f"Target Language: {current_lang}.\n{prompt_txt}\n\nText: {text}"}
                     ]
                 },
                 timeout=15
@@ -636,7 +667,7 @@ class ClarityKeyApp:
         menu.addSeparator()
         
         # Mode Actions
-        for mode in MODES.keys():
+        for mode in MODE_PROMPTS['English'].keys():
             action = QAction(f"Mode: {mode}", menu)
             action.setCheckable(True)
             action.setChecked(self.settings['currentMode'] == mode)
@@ -852,7 +883,7 @@ class SettingsWindow(QMainWindow):
         card_layout.addWidget(desc)
 
         self.mode_combo = QComboBox()
-        self.mode_combo.addItems(list(MODES.keys()))
+        self.mode_combo.addItems(list(MODE_PROMPTS['English'].keys()))
         self.mode_combo.setCurrentText(self.main_app.settings['currentMode'])
         self.mode_combo.currentTextChanged.connect(self.update_setting('currentMode'))
         card_layout.addWidget(self.mode_combo)
