@@ -1078,6 +1078,7 @@
                             onclick="document.getElementById('tts-demo').play(); document.getElementById('svg-s4').classList.add('playing')"
                             style="background: #1a1e2e; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; cursor: pointer;"
                             title="Click to hear demo">
+                            <span style="position: absolute; top: 1rem; color: rgba(255, 255, 255, 0.4); font-size: 0.85rem; font-family: 'Inter', sans-serif; pointer-events: none;">Click anywhere to hear demo</span>
                             <svg id="svg-s4" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice"
                                 xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
                                 <style>
@@ -1193,13 +1194,7 @@
                                         font-size="12" fill="#fff" style="letter-spacing: 0.5px;">Corrected</text>
                                 </g>
 
-                                <!-- Sound Waves aligned next to Doc -->
-                                <g transform="translate(400, 180)">
-                                    <circle class="pulse" cx="0" cy="0" r="60" />
-                                    <circle class="pulse" cx="0" cy="0" r="100" style="animation-delay: 0.8s;" />
-                                    <!-- Central Node -->
-                                    <circle cx="0" cy="0" r="18" fill="#6366f1" />
-                                </g>
+                                <!-- Sound Waves removed -->
 
                             </svg>
                         </div>
