@@ -66,34 +66,34 @@ if SUPABASE_URL != "https://your-project.supabase.co":
 
 MODE_PROMPTS = {
     'English': {
-        'Spelling Fix Only': "Correct only standard typos and spelling of the following text. Do not change grammar, sentence structure, abbreviation, or deliberate slang. Analyze and fully understand the context of the text (e.g., informal chat, gaming) so the output makes sense. Return ONLY the corrected text.",
-        'Grammar + Spelling': "Correct spelling and grammar while preserving deliberate slang, abbreviations, and informal styles. Analyze and fully understand the context of the text (e.g., informal chat, gaming) so the output makes sense. Return ONLY the corrected text.",
-        'Simplified Version': "Rewrite the following text in clearer, easier language. Analyze the full context first. Return ONLY the simplified text.",
-        'Professional Rewrite': "Rewrite the following text to make it sound professional and clear while fully respecting the topics' context. Return ONLY the rewritten text."
+        'Spelling Fix Only': "You are an AI dyslexia corrector. Understand the copied text, and correct ONLY the spelling if needed. Do not change grammar or sentence structure. Return ONLY the corrected text.",
+        'Grammar + Spelling': "You are an AI dyslexia corrector. Understand the copied text and correct only the spelling and grammar if needed. Maintain the original tone. Return ONLY the corrected text.",
+        'Simplified Version': "You are an AI dyslexia corrector. Understand the copied text and rewrite it in simpler, clearer language. Return ONLY the simplified text.",
+        'Professional Rewrite': "You are an AI dyslexia corrector. Understand the copied text and rewrite it to make it sound professional and clear. Return ONLY the rewritten text."
     },
     'Danish': {
-        'Spelling Fix Only': "Ret kun stavefejl og slåfejl i følgende tekst. Ændr ikke grammatik, sætningsstruktur, forkortelser eller bevidst slang. Analyser og forstå fuldt ud konteksten af teksten (f.eks. uformel chat, gaming) så outputtet giver mening. Returnér KUN den rettede tekst.",
-        'Grammar + Spelling': "Ret stavning og grammatik, mens du bevarer bevidst slang, forkortelser og uformelle stilarter. Analyser og forstå fuldt ud konteksten af teksten (f.eks. uformel chat, gaming) så outputtet giver mening. Returnér KUN den rettede tekst.",
-        'Simplified Version': "Omskriv følgende tekst til et klarere og nemmere sprog. Analyser den fulde kontekst først. Returnér KUN den forenklede tekst.",
-        'Professional Rewrite': "Omskriv følgende tekst for at få den til at lyde professionel og klar, mens du fuldt ud respekterer emnets kontekst. Returnér KUN den omskrevne tekst."
+        'Spelling Fix Only': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og ret KUN stavningen, hvis det er nødvendigt. Ændr ikke grammatik eller sætningsstruktur. Returnér KUN den rettede tekst.",
+        'Grammar + Spelling': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og ret kun stavning og grammatik, hvis det er nødvendigt. Bevar den originale tone. Returnér KUN den rettede tekst.",
+        'Simplified Version': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og omskriv den til et simplere og klarere sprog. Returnér KUN den forenklede tekst.",
+        'Professional Rewrite': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og omskriv den så den lyder professionel og klar. Returnér KUN den omskrevne tekst."
     },
     'Spanish': {
-        'Spelling Fix Only': "Corrige solo los errores ortográficos y tipográficos del siguiente texto. No cambies la gramática, la estructura de las frases, las abreviaturas o el argot deliberado. Analiza y comprende completamente el contexto del texto (por ejemplo, chat informal, juegos) para que el resultado tenga sentido. Devuelve SOLO el texto corregido.",
-        'Grammar + Spelling': "Corrige la ortografía y la gramática conservando el argot deliberado, las abreviaturas y los estilos de chat informales. Analiza y comprende completamente el contexto del texto (por ejemplo, chat informal, juegos) para que el resultado tenga sentido. Devuelve SOLO el texto corregido.",
-        'Simplified Version': "Reescribe el siguiente texto en un lenguaje más claro y sencillo. Analiza primero el contexto completo. Devuelve SOLO el texto simplificado.",
-        'Professional Rewrite': "Reescribe el siguiente texto para que suene profesional y claro respetando el contexto del tema. Devuelve SOLO el texto reescrito."
+        'Spelling Fix Only': "Eres un corrector de dislexia con IA. Entiende el texto copiado y corrige SOLO la ortografía si es necesario. No cambies la gramática ni la estructura de las frases. Devuelve SOLO el texto corregido.",
+        'Grammar + Spelling': "Eres un corrector de dislexia con IA. Entiende el texto copiado y corrige solo la ortografía y la gramática si es necesario. Mantén el tono original. Devuelve SOLO el texto corregido.",
+        'Simplified Version': "Eres un corrector de dislexia con IA. Entiende el texto copiado y reescríbelo en un lenguaje más sencillo y claro. Devuelve SOLO el texto simplificado.",
+        'Professional Rewrite': "Eres un corrector de dislexia con IA. Entiende el texto copiado y reescríbelo para que suene profesional y claro. Devuelve SOLO el texto reescrito."
     },
     'German': {
-        'Spelling Fix Only': "Korrigiere nur Tippfehler und Rechtschreibung des folgenden Textes. Ändere weder Grammatik, Satzbau, Abkürzungen noch bewussten Slang. Analysieren und verstehen Sie den Kontext des Textes (z.B. informeller Chat, Gaming) vollständig, damit die Ausgabe Sinn ergibt. Gib NUR den korrigierten Text zurück.",
-        'Grammar + Spelling': "Korrigiere Rechtschreibung und Grammatik, während bewusster Slang, Abkürzungen und informelle Chat-Stile erhalten bleiben. Analysieren und verstehen Sie den Kontext des Textes (z.B. informeller Chat, Gaming) vollständig, damit die Ausgabe Sinn ergibt. Gib NUR den korrigierten Text zurück.",
-        'Simplified Version': "Schreibe den folgenden Text in verständlicherer, einfacherer Sprache um. Analysieren Sie zuerst den gesamten Kontext. Gib NUR den vereinfachten Text zurück.",
-        'Professional Rewrite': "Schreibe den folgenden Text um, damit er professionell und klar klingt, unter Berücksichtigung des Kontexts. Gib NUR den umgeschriebenen Text zurück."
+        'Spelling Fix Only': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und korrigiere NUR die Rechtschreibung, wenn nötig. Ändere weder Grammatik noch Satzbau. Gib NUR den korrigierten Text zurück.",
+        'Grammar + Spelling': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und korrigiere nur Rechtschreibung und Grammatik, wenn nötig. Bewahre den Originalton. Gib NUR den korrigierten Text zurück.",
+        'Simplified Version': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und schreibe ihn in einfacherer, klarerer Sprache um. Gib NUR den vereinfachten Text zurück.",
+        'Professional Rewrite': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und schreibe ihn um, damit er professionell und klar klingt. Gib NUR den umgeschriebenen Text zurück."
     },
     'French': {
-        'Spelling Fix Only': "Corrigez uniquement les fautes de frappe et d'orthographe du texte suivant. Ne modifiez pas la grammaire, la structure des phrases, les abréviations ou l'argot délibéré. Analysez et comprenez parfaitement le contexte du texte (par exemple, chat informel, jeux) pour que le résultat ait du sens. Renvoyez UNIQUEMENT le texte corrigé.",
-        'Grammar + Spelling': "Corrigez l'orthographe et la France tout en préservant l'argot délibéré, les abréviations et les styles d'écriture informels. Analysez et comprenez parfaitement le contexte du texte (par exemple, chat informel, jeux) pour que le résultat ait du sens. Renvoyez UNIQUEMENT le texte corrigé.",
-        'Simplified Version': "Réécrivez le texte suivant dans un langage plus clair et plus simple. Analysez d'abord le contexte complet. Renvoyez UNIQUEMENT le texte simplifié.",
-        'Professional Rewrite': "Réécrivez le texte suivant pour qu'il soit professionnel et clair en respectant le contexte du sujet. Renvoyez UNIQUEMENT le texte réécrit."
+        'Spelling Fix Only': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et corrigez UNIQUEMENT l'orthographe si nécessaire. Ne modifiez pas la grammaire ni la structure des phrases. Renvoyez UNIQUEMENT le texte corrigé.",
+        'Grammar + Spelling': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et corrigez uniquement l'orthographe et la grammaire si nécessaire. Conservez le ton d'origine. Renvoyez UNIQUEMENT le texte corrigé.",
+        'Simplified Version': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et réécrivez-le dans un langage plus simple et clair. Renvoyez UNIQUEMENT le texte simplifié.",
+        'Professional Rewrite': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et réécrivez-le pour qu'il soit professionnel et clair. Renvoyez UNIQUEMENT le texte réécrit."
     }
 }
 
