@@ -18,11 +18,11 @@ from PyQt6.QtGui import QIcon, QFont, QAction, QColor, QPalette
 # myappid = 'com.claritykey.ai.python' (Moved to __main__ to avoid DPI conflict)
 
 # Configuration
-APP_VERSION = "v1.1"
+APP_VERSION = "v1.2"
 SETTINGS_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'settings.json')
 SESSION_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'session.json')
 USAGE_FILE = os.path.join(os.getenv('APPDATA'), 'ClarityKeyAI', 'usage.json')
-MODEL_ID = "mistralai/ministral-8b-2512"
+MODEL_ID = "z-ai/glm-4-32b"
 
 # Supabase Auth Configuration
 SUPABASE_URL = "https://ehdwjvqwgkjfrquqwehj.supabase.co"
