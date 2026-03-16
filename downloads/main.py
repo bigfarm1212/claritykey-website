@@ -66,32 +66,32 @@ if SUPABASE_URL != "https://your-project.supabase.co":
 
 MODE_PROMPTS = {
     'English': {
-        'Spelling Fix Only': "You are an AI dyslexia corrector. Understand the copied text, and correct ONLY the spelling if needed. Do not change grammar or sentence structure. Return ONLY the corrected text.",
-        'Grammar + Spelling': "You are an AI dyslexia corrector. Understand the copied text and correct only the spelling and grammar if needed. Maintain the original tone. Return ONLY the corrected text.",
+        'Spelling Fix Only': "You are an AI dyslexia corrector. Understand the copied text, and correct ONLY the spelling. Do not change grammar or sentence structure. Return ONLY the corrected text.",
+        'Grammar + Spelling': "You are an AI dyslexia corrector. Understand the copied text and correct only the spelling and grammar. Maintain the original tone. Return ONLY the corrected text.",
         'Simplified Version': "You are an AI dyslexia corrector. Understand the copied text and rewrite it in simpler, clearer language. Return ONLY the simplified text.",
         'Professional Rewrite': "You are an AI dyslexia corrector. Understand the copied text and rewrite it to make it sound professional and clear. Return ONLY the rewritten text."
     },
     'Danish': {
-        'Spelling Fix Only': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og ret KUN stavningen, hvis det er nødvendigt. Ændr ikke grammatik eller sætningsstruktur. Returnér KUN den rettede tekst.",
-        'Grammar + Spelling': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og ret kun stavning og grammatik, hvis det er nødvendigt. Bevar den originale tone. Returnér KUN den rettede tekst.",
+        'Spelling Fix Only': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og ret KUN stavningen. Ændr ikke grammatik eller sætningsstruktur. Returnér KUN den rettede tekst.",
+        'Grammar + Spelling': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og ret kun stavning og grammatik. Bevar den originale tone. Returnér KUN den rettede tekst.",
         'Simplified Version': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og omskriv den til et simplere og klarere sprog. Returnér KUN den forenklede tekst.",
         'Professional Rewrite': "Du er en AI-ordblinde-korrektør. Forstå den kopierede tekst, og omskriv den så den lyder professionel og klar. Returnér KUN den omskrevne tekst."
     },
     'Spanish': {
-        'Spelling Fix Only': "Eres un corrector de dislexia con IA. Entiende el texto copiado y corrige SOLO la ortografía si es necesario. No cambies la gramática ni la estructura de las frases. Devuelve SOLO el texto corregido.",
-        'Grammar + Spelling': "Eres un corrector de dislexia con IA. Entiende el texto copiado y corrige solo la ortografía y la gramática si es necesario. Mantén el tono original. Devuelve SOLO el texto corregido.",
+        'Spelling Fix Only': "Eres un corrector de dislexia con IA. Entiende el texto copiado y corrige SOLO la ortografía. No cambies la gramática ni la estructura de las frases. Devuelve SOLO el texto corregido.",
+        'Grammar + Spelling': "Eres un corrector de dislexia con IA. Entiende el texto copiado y corrige solo la ortografía y la gramática. Mantén el tono original. Devuelve SOLO el texto corregido.",
         'Simplified Version': "Eres un corrector de dislexia con IA. Entiende el texto copiado y reescríbelo en un lenguaje más sencillo y claro. Devuelve SOLO el texto simplificado.",
         'Professional Rewrite': "Eres un corrector de dislexia con IA. Entiende el texto copiado y reescríbelo para que suene profesional y claro. Devuelve SOLO el texto reescrito."
     },
     'German': {
-        'Spelling Fix Only': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und korrigiere NUR die Rechtschreibung, wenn nötig. Ändere weder Grammatik noch Satzbau. Gib NUR den korrigierten Text zurück.",
-        'Grammar + Spelling': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und korrigiere nur Rechtschreibung und Grammatik, wenn nötig. Bewahre den Originalton. Gib NUR den korrigierten Text zurück.",
+        'Spelling Fix Only': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und korrigiere NUR die Rechtschreibung. Ändere weder Grammatik noch Satzbau. Gib NUR den korrigierten Text zurück.",
+        'Grammar + Spelling': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und korrigiere nur Rechtschreibung und Grammatik. Bewahre den Originalton. Gib NUR den korrigierten Text zurück.",
         'Simplified Version': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und schreibe ihn in einfacherer, klarerer Sprache um. Gib NUR den vereinfachten Text zurück.",
         'Professional Rewrite': "Du bist ein KI-Legasthenie-Korrektor. Verstehe den kopierten Text und schreibe ihn um, damit er professionell und klar klingt. Gib NUR den umgeschriebenen Text zurück."
     },
     'French': {
-        'Spelling Fix Only': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et corrigez UNIQUEMENT l'orthographe si nécessaire. Ne modifiez pas la grammaire ni la structure des phrases. Renvoyez UNIQUEMENT le texte corrigé.",
-        'Grammar + Spelling': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et corrigez uniquement l'orthographe et la grammaire si nécessaire. Conservez le ton d'origine. Renvoyez UNIQUEMENT le texte corrigé.",
+        'Spelling Fix Only': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et corrigez UNIQUEMENT l'orthographe. Ne modifiez pas la grammaire ni la structure des phrases. Renvoyez UNIQUEMENT le texte corrigé.",
+        'Grammar + Spelling': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et corrigez uniquement l'orthographe et la grammaire. Conservez le ton d'origine. Renvoyez UNIQUEMENT le texte corrigé.",
         'Simplified Version': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et réécrivez-le dans un langage plus simple et clair. Renvoyez UNIQUEMENT le texte simplifié.",
         'Professional Rewrite': "Vous êtes un correcteur de dyslexie IA. Comprenez le texte copié et réécrivez-le pour qu'il soit professionnel et clair. Renvoyez UNIQUEMENT le texte réécrit."
     }
