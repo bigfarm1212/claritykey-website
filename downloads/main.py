@@ -602,10 +602,7 @@ class ClarityKeyApp(QObject):
                 print("Text corrected and copied to clipboard.")
 
                 if self.settings.get('playNotifySound', True):
-                    try:
-                        mci = ctypes.windll.winmm.mciSendStringW
-                        mci('play success_sound from 0', None, 0, None)
-                    except: pass
+                    self.communicator.play_sound_sgn.emit()
                 
                 if self.settings['instantReplace']:
                     # Simulate Ctrl+V on Windows
