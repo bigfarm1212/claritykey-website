@@ -107,7 +107,8 @@ DEFAULT_SETTINGS = {
     'easyReading': False,
     'currentMode': 'Grammar + Spelling',
     'language': 'English',
-    'playNotifySound': True
+    'playNotifySound': True,
+    'soundVolume': 80
 }
 
 def ensure_sound_file():
@@ -151,7 +152,8 @@ class ClarityKeyApp(QObject):
         self.success_sound_path = os.path.join(base_path, "683101__florianreichelt__quick-woosh.mp3")
         mci = ctypes.windll.winmm.mciSendStringW
         mci(f'open "{self.success_sound_path}" type mpegvideo alias success_sound', None, 0, None)
-        mci('set success_sound volume to 1000', None, 0, None)
+        vol = self.settings.get('soundVolume', 80) * 10
+        mci(f'set success_sound volume to {vol}', None, 0, None)
         
         if 'device_id' not in self.settings:
             import uuid
@@ -904,6 +906,21 @@ class SettingsWindow(QMainWindow):
         self.sound_cb.stateChanged.connect(self.update_setting('playNotifySound'))
         card_layout.addWidget(self.sound_cb)
 
+        vol_layout = QHBoxLayout()
+        vol_layout.setSpacing(15)
+        vol_layout.setContentsMargins(55, 0, 0, 0)
+        vol_label = QLabel("Sound Volume")
+        vol_label.setStyleSheet("font-size: 14px; font-weight: 500; color: #475569; border: none;")
+        from PyQt6.QtWidgets import QSlider
+        self.vol_slider = QSlider(Qt.Orientation.Horizontal)
+        self.vol_slider.setRange(0, 100)
+        self.vol_slider.setValue(self.main_app.settings.get('soundVolume', 80))
+        self.vol_slider.setFixedWidth(200)
+        self.vol_slider.valueChanged.connect(self.update_volume_setting)
+        vol_layout.addWidget(vol_label)
+        vol_layout.addWidget(self.vol_slider)
+        card_layout.addLayout(vol_layout)
+
         self.read_cb = QCheckBox("Read Text Aloud on Insert Key")
         self.read_cb.setChecked(self.main_app.settings.get('readAloudHotkey', True))
         self.read_cb.stateChanged.connect(self.update_setting('readAloudHotkey'))
@@ -1032,6 +1049,12 @@ class SettingsWindow(QMainWindow):
             self.main_app.save_settings()
             self.main_app.update_tray()
         return inner
+
+    def update_volume_setting(self, value):
+        self.main_app.settings['soundVolume'] = value
+        self.main_app.save_settings()
+        mci = ctypes.windll.winmm.mciSendStringW
+        mci(f'set success_sound volume to {value * 10}', None, 0, None)
 
 class LoginWindow(QMainWindow):
     def __init__(self, main_app):
